@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วัดผลสูตรคูณ 55 ข้อ — ครูแซม</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Kanit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B3E;
+  --blue: #1A3A8F;
+  --gold: #F5A623;
+  --green: #06D6A0;
+  --red: #EF476F;
+  --bg: #F0F4FF;
+  --card: #FFFFFF;
+  --text: #0D1B3E;
+  --muted: #6B7A9F;
+  --border: #D0D8F0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+.header {
+  background: var(--navy); padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 16px rgba(13,27,62,0.3);
+}
+.logo { font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 700; color: var(--gold); }
+.logo span { color: #fff; font-weight: 400; }
+.header-badge { background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-family: 'Kanit', sans-serif; }
+
+.screen { display: none; animation: fadeIn 0.3s ease; }
+.screen.active { display: block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)} }
+.container { max-width: 560px; margin: 0 auto; padding: 20px 16px 48px; }
+
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  border-radius: 20px; padding: 28px 24px; text-align: center;
+  margin-bottom: 20px; position: relative; overflow: hidden;
+}
+.hero::before { content:'×'; position:absolute; font-size:160px; font-family:'Kanit',sans-serif; color:rgba(255,255,255,0.04); right:-20px; top:-30px; line-height:1; }
+.hero-title { font-family:'Kanit',sans-serif; font-size:26px; font-weight:900; color:#fff; line-height:1.2; margin-bottom:8px; }
+.hero-title span { color: var(--gold); }
+.hero-sub { font-size:13px; color:rgba(255,255,255,0.75); margin-bottom:10px; line-height:1.6; }
+.hero-badge { display:inline-block; background:rgba(245,166,35,0.2); border:1px solid var(--gold); color:var(--gold); font-size:12px; font-weight:600; padding:4px 14px; border-radius:20px; }
+
+.criteria-card { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 20px; border: 1px solid var(--border); }
+.criteria-title { font-family:'Kanit',sans-serif; font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+.criteria-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.criteria-row:last-child { border-bottom:none; }
+.criteria-row .grade { font-weight:700; color:var(--navy); min-width:36px; }
+.criteria-row .time { font-family:'Kanit',sans-serif; font-size:12px; font-weight:700; color:var(--blue); background:var(--bg); padding:2px 10px; border-radius:6px; }
+.criteria-row .note { font-size:11px; color:var(--muted); }
+
+.form-card { background: var(--card); border-radius: 16px; padding: 22px; margin-bottom: 14px; border: 1px solid var(--border); }
+.form-title { font-family:'Kanit',sans-serif; font-size:15px; font-weight:700; color:var(--navy); margin-bottom:14px; }
+.form-group { margin-bottom: 12px; }
+label { display:block; font-size:12px; font-weight:600; color:var(--muted); margin-bottom:4px; }
+input[type="text"], select {
+  width:100%; padding:11px 14px; border:2px solid var(--border);
+  border-radius:10px; font-family:'Sarabun',sans-serif; font-size:14px;
+  color:var(--text); background:var(--bg); outline:none;
+  transition:border-color 0.2s; appearance:none;
+}
+input[type="text"]:focus, select:focus { border-color:var(--blue); background:#fff; }
+
+.quiz-info-box { background: var(--bg); border-radius: 10px; padding: 12px 14px; margin-top: 10px; border: 1px solid var(--border); }
+.quiz-info-row { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); padding:3px 0; }
+.quiz-info-row strong { color:var(--navy); font-weight:700; }
+
+.btn { display:block; width:100%; padding:14px; border:none; border-radius:12px; font-family:'Kanit',sans-serif; font-size:16px; font-weight:700; cursor:pointer; transition:all 0.2s; text-align:center; margin-bottom:10px; }
+.btn-primary { background:linear-gradient(135deg,var(--blue),var(--navy)); color:#fff; box-shadow:0 6px 20px rgba(26,58,143,0.3); }
+.btn-primary:hover { transform:translateY(-2px); }
+.btn-gold { background:linear-gradient(135deg,var(--gold),#e8950f); color:var(--navy); box-shadow:0 6px 20px rgba(245,166,35,0.3); }
+.btn-gold:hover { transform:translateY(-2px); }
+.btn-outline { background:transparent; color:var(--blue); border:2px solid var(--blue); }
+.btn-outline:hover { background:var(--bg); }
+
+/* QUIZ */
+.quiz-header { background:linear-gradient(135deg,var(--navy),var(--blue)); border-radius:20px; padding:18px 20px; margin-bottom:14px; color:#fff; }
+.quiz-top-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.quiz-mode-tag { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); font-family:'Kanit',sans-serif; font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px; }
+.quiz-counter-big { font-family:'Kanit',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); }
+.quiz-progress-bar-wrap { background:rgba(255,255,255,0.15); border-radius:10px; height:5px; margin-bottom:12px; overflow:hidden; }
+.quiz-progress-bar { background:var(--gold); height:100%; border-radius:10px; transition:width 0.4s; }
+.quiz-timer-display { font-family:'Kanit',sans-serif; font-size:60px; font-weight:900; line-height:1; letter-spacing:-2px; text-align:center; margin:4px 0 8px; transition:color 0.3s; }
+.quiz-timer-display.warning { color:var(--gold); }
+.quiz-timer-display.danger  { color:var(--red); animation:pulse 0.5s infinite alternate; }
+@keyframes pulse { from{opacity:1}to{opacity:0.6} }
+.quiz-score-row { display:flex; justify-content:space-around; }
+.quiz-score-item { text-align:center; }
+.quiz-score-item .val { font-family:'Kanit',sans-serif; font-size:20px; font-weight:900; color:#fff; line-height:1; }
+.quiz-score-item .lbl { font-size:10px; color:rgba(255,255,255,0.6); margin-top:2px; }
+
+.question-card { background:var(--card); border-radius:18px; padding:24px 20px; text-align:center; margin-bottom:14px; border:1px solid var(--border); box-shadow:0 4px 20px rgba(13,27,62,0.07); }
+.question-text { font-family:'Kanit',sans-serif; font-size:44px; font-weight:900; color:var(--navy); line-height:1.1; margin-bottom:4px; }
+.question-sub  { font-size:12px; color:var(--muted); }
+
+.choices-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.choice-btn { background:var(--card); border:2px solid var(--border); border-radius:14px; padding:16px 10px; font-family:'Kanit',sans-serif; font-size:28px; font-weight:700; color:var(--navy); cursor:pointer; transition:all 0.15s; text-align:center; box-shadow:0 2px 8px rgba(13,27,62,0.06); }
+.choice-btn:hover:not(:disabled) { border-color:var(--blue); background:var(--bg); transform:translateY(-2px); }
+.choice-btn.correct { background:rgba(6,214,160,0.15); border-color:var(--green); color:var(--green); }
+.choice-btn.wrong   { background:rgba(239,71,111,0.12); border-color:var(--red);   color:var(--red);   }
+.choice-btn.reveal  { background:rgba(6,214,160,0.1);  border-color:var(--green); color:var(--green); }
+.choice-btn:disabled { cursor:not-allowed; }
+
+.feedback-bar { border-radius:12px; padding:10px 14px; text-align:center; margin-bottom:10px; font-family:'Kanit',sans-serif; font-size:14px; font-weight:700; display:none; }
+.feedback-bar.correct { background:rgba(6,214,160,0.15); color:var(--green); }
+.feedback-bar.wrong   { background:rgba(239,71,111,0.12); color:var(--red); }
+
+/* RESULT */
+.result-hero { border-radius:20px; padding:28px 22px; text-align:center; margin-bottom:14px; color:#fff; }
+.result-hero.result-pass { background:linear-gradient(135deg,#048a6a,var(--green)); }
+.result-hero.result-fail { background:linear-gradient(135deg,#b0314f,var(--red)); }
+.result-icon  { font-size:52px; margin-bottom:8px; }
+.result-title { font-family:'Kanit',sans-serif; font-size:22px; font-weight:900; margin-bottom:4px; }
+.result-name  { font-size:14px; opacity:0.9; margin-bottom:4px; }
+.result-grade { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; margin-top:6px; }
+
+.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
+.stat-box { background:var(--card); border-radius:12px; padding:12px 8px; text-align:center; border:1px solid var(--border); }
+.stat-box .s-num { font-family:'Kanit',sans-serif; font-size:20px; font-weight:900; color:var(--navy); }
+.stat-box .s-lbl { font-size:10px; color:var(--muted); margin-top:2px; }
+
+.overall-banner { border-radius:14px; padding:16px 20px; text-align:center; margin-bottom:14px; font-family:'Kanit',sans-serif; }
+.overall-banner.pass { background:rgba(6,214,160,0.1); border:2px solid var(--green); color:#048a6a; }
+.overall-banner.fail { background:rgba(239,71,111,0.08); border:2px solid var(--red); color:#b0314f; }
+.ob-icon { font-size:28px; margin-bottom:4px; }
+.ob-text { font-size:15px; font-weight:700; }
+.ob-sub  { font-size:12px; font-weight:400; margin-top:4px; opacity:0.85; }
+
+.section-title { font-family:'Kanit',sans-serif; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+.history-list { display:flex; flex-direction:column; gap:7px; margin-bottom:14px; }
+.history-item { display:flex; align-items:center; justify-content:space-between; background:var(--card); border-radius:10px; padding:10px 14px; border:1px solid var(--border); }
+.h-label { font-size:12px; color:var(--muted); flex:1; }
+.h-value { font-family:'Kanit',sans-serif; font-size:15px; font-weight:700; flex:1; text-align:center; }
+.h-badge { font-size:11px; font-weight:700; padding:3px 10px; border-radius:7px; flex:1; text-align:right; white-space:nowrap; }
+.h-badge.pass { background:rgba(6,214,160,0.15); color:var(--green); }
+.h-badge.fail { background:rgba(239,71,111,0.15); color:var(--red); }
+
+.share-card { background:var(--navy); border-radius:16px; padding:20px; margin-bottom:14px; color:#fff; position:relative; overflow:hidden; }
+.share-card::after { content:'🔥'; position:absolute; font-size:70px; right:10px; bottom:-10px; opacity:0.1; }
+.share-title { font-family:'Kanit',sans-serif; font-size:11px; color:var(--gold); font-weight:700; margin-bottom:8px; letter-spacing:1px; text-transform:uppercase; }
+.share-text  { font-size:12px; line-height:1.8; color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.08); border-radius:10px; padding:12px; margin-bottom:10px; white-space:pre-wrap; }
+.divider { height:1px; background:var(--border); margin:14px 0; }
+
+.toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--navy); color:#fff; padding:10px 20px; border-radius:40px; font-size:13px; font-weight:600; z-index:9999; transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); white-space:nowrap; box-shadow:0 8px 30px rgba(0,0,0,0.25); }
+.toast.show { transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">ครู<span>แซม</span></div>
+  <div class="header-badge">วัดผลสูตรคูณ</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- ══════════ HOME ══════════ -->
+<div class="screen active" id="screen-home">
+  <div class="container">
+
+    <div class="hero">
+      <div class="hero-title">🔥 วัดผล<span>สูตรคูณ</span></div>
+      <div class="hero-sub">
+        แบบทดสอบ <strong style="color:var(--gold);">55 ข้อ</strong> · 4 ตัวเลือก<br>
+        แม่ 2–12 ครบทุกตัว · ผิดได้ไม่เกิน 2 ข้อ
+      </div>
+      <div class="hero-badge">ครูแซม</div>
+    </div>
+
+    <div class="criteria-card">
+      <div class="criteria-title">🎯 เกณฑ์การวัดผล — 55 ข้อ</div>
+      <div class="criteria-row">
+        <span class="grade">ป.6</span>
+        <span class="time">2:18 <small style="font-weight:400;">(138 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">ป.5</span>
+        <span class="time">3:13 <small style="font-weight:400;">(193 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">ป.4</span>
+        <span class="time">4:08 <small style="font-weight:400;">(248 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">ป.3</span>
+        <span class="time">5:03 <small style="font-weight:400;">(303 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">ป.2</span>
+        <span class="time">5:58 <small style="font-weight:400;">(358 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">ป.1</span>
+        <span class="time">6:53 <small style="font-weight:400;">(413 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">อ.3</span>
+        <span class="time">7:48 <small style="font-weight:400;">(468 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">อ.2</span>
+        <span class="time">8:43 <small style="font-weight:400;">(523 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row">
+        <span class="grade">อ.1</span>
+        <span class="time">9:38 <small style="font-weight:400;">(578 วิ)</small></span>
+        <span class="note">ผิดได้ ≤ 2 ข้อ</span>
+      </div>
+      <div class="criteria-row" style="padding-top:8px;">
+        <span style="font-size:11px;color:var(--muted);">
+          ✅ ผ่าน = ทันเวลา <strong>และ</strong> ผิดไม่เกิน 2 ข้อ
+        </span>
+      </div>
+    </div>
+
+    <button class="btn btn-gold" onclick="showSetup()" style="font-size:18px;padding:16px;">
+      🔥 เริ่มทดสอบ 55 ข้อ
+    </button>
+
+  </div>
+</div>
+
+<!-- ══════════ SETUP ══════════ -->
+<div class="screen" id="screen-setup">
+  <div class="container">
+    <div class="form-card">
+      <div class="form-title">🧠 Quiz 55 ข้อ — ข้อมูลนักเรียน</div>
+
+      <div class="form-group">
+        <label>ชื่อ–นามสกุล</label>
+        <input type="text" id="input-name" placeholder="เช่น น้องมิน สุขใจ">
+      </div>
+
+      <div class="form-group">
+        <label>ระดับชั้น <span style="color:var(--muted);font-weight:400;">(กำหนดเวลาที่ใช้)</span></label>
+        <select id="input-grade" onchange="updateInfoBox()">
+          <option value="">-- เลือกระดับชั้น --</option>
+          <option value="อ.1|578">อนุบาล 1 — เป้า 9:38 (578 วิ)</option>
+          <option value="อ.2|523">อนุบาล 2 — เป้า 8:43 (523 วิ)</option>
+          <option value="อ.3|468">อนุบาล 3 — เป้า 7:48 (468 วิ)</option>
+          <option value="ป.1|413">ประถม 1 — เป้า 6:53 (413 วิ)</option>
+          <option value="ป.2|358">ประถม 2 — เป้า 5:58 (358 วิ)</option>
+          <option value="ป.3|303">ประถม 3 — เป้า 5:03 (303 วิ)</option>
+          <option value="ป.4|248">ประถม 4 — เป้า 4:08 (248 วิ)</option>
+          <option value="ป.5|193">ประถม 5 — เป้า 3:13 (193 วิ)</option>
+          <option value="ป.6|138">ประถม 6 — เป้า 2:18 (138 วิ)</option>
+        </select>
+      </div>
+
+      <div class="quiz-info-box" id="quiz-info-box" style="display:none;">
+        <div class="quiz-info-row"><span>จำนวนข้อ</span><strong>55 ข้อ</strong></div>
+        <div class="quiz-info-row"><span>เวลาที่กำหนด</span><strong id="info-time">—</strong></div>
+        <div class="quiz-info-row"><span>ผิดได้ไม่เกิน</span><strong>2 ข้อ</strong></div>
+        <div class="quiz-info-row"><span>รูปแบบโจทย์</span><strong>ผล = a × ? (4 ตัวเลือก)</strong></div>
+      </div>
+    </div>
+
+    <button class="btn btn-gold" onclick="confirmSetup()">✓ ยืนยัน เริ่มทดสอบ</button>
+    <button class="btn btn-outline" onclick="showScreen('screen-home')">← กลับ</button>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div class="screen" id="screen-quiz">
+  <div class="container">
+    <div class="quiz-header">
+      <div class="quiz-top-row">
+        <div class="quiz-mode-tag">🔥 Quiz 55 ข้อ</div>
+        <div class="quiz-counter-big" id="quiz-counter">1 / 55</div>
+      </div>
+      <div class="quiz-progress-bar-wrap">
+        <div class="quiz-progress-bar" id="quiz-progress-bar" style="width:0%"></div>
+      </div>
+      <div class="quiz-timer-display" id="quiz-timer">00:00</div>
+      <div class="quiz-score-row">
+        <div class="quiz-score-item">
+          <div class="val" id="qs-correct">0</div>
+          <div class="lbl">✅ ถูก</div>
+        </div>
+        <div class="quiz-score-item">
+          <div class="val" id="qs-wrong">0</div>
+          <div class="lbl">❌ ผิด</div>
+        </div>
+        <div class="quiz-score-item">
+          <div class="val">2</div>
+          <div class="lbl">ผิดได้สูงสุด</div>
+        </div>
+        <div class="quiz-score-item">
+          <div class="val" id="qs-remaining">55</div>
+          <div class="lbl">เหลือ (ข้อ)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-text" id="question-text">— × — = ?</div>
+      <div class="question-sub"  id="question-sub">เลือกตัวคูณที่ถูกต้อง</div>
+    </div>
+
+    <div class="feedback-bar" id="feedback-bar"></div>
+    <div class="choices-grid"  id="choices-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════ RESULT ══════════ -->
+<div class="screen" id="screen-result">
+  <div class="container">
+
+    <div class="result-hero" id="result-hero">
+      <div class="result-icon"  id="result-icon">🏆</div>
+      <div class="result-title" id="result-title">ผ่านเกณฑ์!</div>
+      <div class="result-name"  id="result-name"></div>
+      <div class="result-grade" id="result-grade"></div>
+    </div>
+
+    <div class="stat-grid" id="stat-grid"></div>
+
+    <div class="overall-banner" id="overall-banner">
+      <div class="ob-icon" id="ob-icon">✅</div>
+      <div class="ob-text" id="ob-text"></div>
+      <div class="ob-sub"  id="ob-sub"></div>
+    </div>
+
+    <div class="section-title">รายละเอียดผลการทดสอบ</div>
+    <div class="history-list" id="result-history"></div>
+
+    <div class="divider"></div>
+
+    <div class="share-card">
+      <div class="share-title">📤 แชร์ผลให้ผู้ปกครอง</div>
+      <div class="share-text" id="share-text"></div>
+      <button class="btn btn-gold" onclick="copyShare()">📋 คัดลอกข้อความแชร์</button>
+    </div>
+
+    <button class="btn btn-primary" onclick="showScreen('screen-home')">🔄 ทดสอบอีกครั้ง</button>
+  </div>
+</div>
+
+<!-- ══════════ SCRIPT ══════════ -->
+<script>
+const MAX_WRONG = 2;
+const TOTAL_Q   = 55;
+
+let studentName  = '';
+let studentGrade = '';
+let targetSec    = 0;
+let quiz = {};
+
+// ── helpers ──────────────────────────────────────────────────────────
+function fmtTime(sec) {
+  if (!sec || sec < 0) sec = 0;
+  return `${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2300);
+}
+
+// ── setup ────────────────────────────────────────────────────────────
+function showSetup() {
+  document.getElementById('input-name').value  = '';
+  document.getElementById('input-grade').value = '';
+  document.getElementById('quiz-info-box').style.display = 'none';
+  showScreen('screen-setup');
+}
+function updateInfoBox() {
+  const val = document.getElementById('input-grade').value;
+  const box = document.getElementById('quiz-info-box');
+  if (val) {
+    const sec = parseInt(val.split('|')[1]);
+    document.getElementById('info-time').textContent = `${fmtTime(sec)} (${sec} วินาที)`;
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+function confirmSetup() {
+  const name = document.getElementById('input-name').value.trim();
+  if (!name) { toast('⚠️ กรุณากรอกชื่อนักเรียน'); return; }
+  const gv = document.getElementById('input-grade').value;
+  if (!gv)   { toast('⚠️ กรุณาเลือกระดับชั้น');    return; }
+  const [g, s] = gv.split('|');
+  studentName  = name;
+  studentGrade = g;
+  targetSec    = parseInt(s);
+  startQuiz();
+}
+
+// ── question bank ─────────────────────────────────────────────────────
+function allFacts() {
+  const f = [];
+  for (let a = 2; a <= 12; a++)
+    for (let b = 1; b <= 12; b++)
+      f.push({ a, b, ans: a * b });
+  return f;
+}
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function generateChoices(correct) {
+  const set = new Set([correct]);
+  let tries = 0;
+  while (set.size < 4 && tries < 300) {
+    tries++;
+    const c = correct + (Math.floor(Math.random() * 17) - 8);
+    if (c >= 1 && c <= 12 && c !== correct) set.add(c);
+  }
+  // fallback fill
+  for (let v = 1; v <= 12 && set.size < 4; v++)
+    if (v !== correct) set.add(v);
+  return [...set].slice(0, 4).sort(() => Math.random() - 0.5);
+}
+
+// ── quiz ──────────────────────────────────────────────────────────────
+function startQuiz() {
+  quiz = {
+    questions:     shuffle(allFacts()).slice(0, TOTAL_Q),
+    current:       0,
+    correct:       0,
+    wrong:         0,
+    answered:      false,
+    timeSec:       targetSec,
+    timerInterval: null,
+    startTime:     Date.now(),
+  };
+  quiz.timerInterval = setInterval(tickCountdown, 500);
+  renderQuestion();
+  showScreen('screen-quiz');
+}
+
+function tickCountdown() {
+  const elapsed = Math.floor((Date.now() - quiz.startTime) / 1000);
+  const remain  = quiz.timeSec - elapsed;
+  const el      = document.getElementById('quiz-timer');
+  if (remain <= 0) {
+    el.textContent = '00:00';
+    el.className   = 'quiz-timer-display danger';
+    clearInterval(quiz.timerInterval);
+    setTimeout(finishQuiz, 500);
+    return;
+  }
+  el.textContent = fmtTime(remain);
+  el.className   = 'quiz-timer-display' +
+    (remain <= 10 ? ' danger' : remain <= 30 ? ' warning' : '');
+}
+
+function renderQuestion() {
+  const q = quiz.questions[quiz.current];
+  quiz.answered = false;
+
+  document.getElementById('quiz-progress-bar').style.width =
+    (quiz.current / TOTAL_Q * 100) + '%';
+  document.getElementById('quiz-counter').textContent  = `${quiz.current + 1} / ${TOTAL_Q}`;
+  document.getElementById('qs-correct').textContent    = quiz.correct;
+  document.getElementById('qs-wrong').textContent      = quiz.wrong;
+  document.getElementById('qs-remaining').textContent  = TOTAL_Q - quiz.current;
+
+  document.getElementById('question-text').textContent = `${q.ans} = ${q.a} × ?`;
+  document.getElementById('question-sub').textContent  = 'เลือกตัวคูณที่ถูกต้อง';
+
+  const choices = generateChoices(q.b);
+  const grid = document.getElementById('choices-grid');
+  grid.innerHTML = '';
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className   = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick     = () => answerQuiz(c, q.b, q);
+    grid.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedback-bar');
+  fb.style.display = 'none';
+  fb.className     = 'feedback-bar';
+}
+
+function answerQuiz(chosen, correct, q) {
+  if (quiz.answered) return;
+  quiz.answered = true;
+
+  const ok = chosen === correct;
+  if (ok) quiz.correct++; else quiz.wrong++;
+
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.disabled = true;
+    const v = parseInt(btn.textContent);
+    if (v === correct)             btn.classList.add(ok && v === chosen ? 'correct' : 'reveal');
+    if (v === chosen && !ok)       btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback-bar');
+  fb.style.display = 'block';
+  fb.className     = 'feedback-bar ' + (ok ? 'correct' : 'wrong');
+  fb.textContent   = ok
+    ? `✅ ถูก!  ${q.ans} = ${q.a} × ${correct}`
+    : `❌ ผิด!  ตัวคูณที่ถูก = ${correct}   →   ${q.a} × ${correct} = ${q.ans}`;
+
+  document.getElementById('qs-correct').textContent = quiz.correct;
+  document.getElementById('qs-wrong').textContent   = quiz.wrong;
+
+  if (quiz.wrong > MAX_WRONG) {
+    clearInterval(quiz.timerInterval);
+    setTimeout(finishQuiz, 1000);
+    return;
+  }
+  setTimeout(() => {
+    quiz.current++;
+    if (quiz.current < TOTAL_Q) renderQuestion();
+    else { clearInterval(quiz.timerInterval); finishQuiz(); }
+  }, 800);
+}
+
+// ── finish ────────────────────────────────────────────────────────────
+function finishQuiz() {
+  clearInterval(quiz.timerInterval);
+  const elapsed   = Math.floor((Date.now() - quiz.startTime) / 1000);
+  const timePass  = elapsed <= quiz.timeSec;
+  const wrongPass = quiz.wrong <= MAX_WRONG;
+  const overall   = timePass && wrongPass;
+
+  // hero
+  document.getElementById('result-hero').className =
+    'result-hero ' + (overall ? 'result-pass' : 'result-fail');
+  document.getElementById('result-icon').textContent  = overall ? '🏆' : '💪';
+  document.getElementById('result-title').textContent = overall ? 'ผ่านเกณฑ์!' : 'ยังไม่ผ่านเกณฑ์';
+  document.getElementById('result-name').textContent  = studentName;
+  document.getElementById('result-grade').textContent =
+    `ระดับ ${studentGrade}  |  เป้าหมาย ${fmtTime(targetSec)}  |  ผิดได้ ≤ ${MAX_WRONG} ข้อ`;
+
+  // stats
+  document.getElementById('stat-grid').innerHTML = `
+    <div class="stat-box"><div class="s-num">${quiz.correct}/${TOTAL_Q}</div><div class="s-lbl">ถูกต้อง</div></div>
+    <div class="stat-box"><div class="s-num">${quiz.wrong}/${MAX_WRONG}</div><div class="s-lbl">ผิด / สูงสุด</div></div>
+    <div class="stat-box"><div class="s-num">${fmtTime(elapsed)}</div><div class="s-lbl">เวลาที่ใช้</div></div>
+  `;
+
+  // verdict banner
+  const ob = document.getElementById('overall-banner');
+  ob.className = 'overall-banner ' + (overall ? 'pass' : 'fail');
+  let obIcon, obText, obSub;
+  if (overall) {
+    obIcon = '✅'; obText = 'นักเรียนคล่องสูตรคูณ!';
+    obSub  = `ทำ ${TOTAL_Q} ข้อ ใน ${fmtTime(elapsed)} · ผิดเพียง ${quiz.wrong} ข้อ`;
+  } else if (!timePass && !wrongPass) {
+    obIcon = '❌'; obText = 'ยังไม่ผ่าน — เกินเวลา และ ผิดเกินกำหนด';
+    obSub  = `ใช้ ${fmtTime(elapsed)} (เกิน ${fmtTime(targetSec)}) · ผิด ${quiz.wrong} ข้อ (เกิน ${MAX_WRONG})`;
+  } else if (!timePass) {
+    obIcon = '⏱'; obText = 'ยังไม่ผ่าน — เกินเวลา';
+    obSub  = `ใช้ ${fmtTime(elapsed)} แต่กำหนด ${fmtTime(targetSec)}`;
+  } else {
+    obIcon = '❌'; obText = 'ยังไม่ผ่าน — ผิดเกินกำหนด';
+    obSub  = `ผิด ${quiz.wrong} ข้อ (ผิดได้ไม่เกิน ${MAX_WRONG} ข้อ)`;
+  }
+  document.getElementById('ob-icon').textContent = obIcon;
+  document.getElementById('ob-text').textContent = obText;
+  document.getElementById('ob-sub').textContent  = obSub;
+
+  // detail rows
+  document.getElementById('result-history').innerHTML = `
+    <div class="history-item">
+      <span class="h-label">เวลาที่ใช้</span>
+      <span class="h-value">${fmtTime(elapsed)}</span>
+      <span class="h-badge ${timePass?'pass':'fail'}">${timePass?'✓ ทันเวลา':'✗ เกินเวลา'}</span>
+    </div>
+    <div class="history-item">
+      <span class="h-label">ข้อที่ผิด</span>
+      <span class="h-value">${quiz.wrong} ข้อ</span>
+      <span class="h-badge ${wrongPass?'pass':'fail'}">${wrongPass?`✓ ≤ ${MAX_WRONG} ข้อ`:`✗ เกิน ${MAX_WRONG} ข้อ`}</span>
+    </div>
+    <div class="history-item">
+      <span class="h-label">ผลโดยรวม</span>
+      <span class="h-value">${overall?'ผ่าน':'ไม่ผ่าน'}</span>
+      <span class="h-badge ${overall?'pass':'fail'}">${overall?'✓ คล่องสูตรคูณ':'✗ ต้องฝึกเพิ่ม'}</span>
+    </div>
+  `;
+
+  // share text
+  const today = new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('share-text').textContent =
+    `${overall?'🏆':'📊'} ผลวัดผลสูตรคูณ 55 ข้อ\n` +
+    `─────────────────\n` +
+    `👤 นักเรียน: ${studentName}\n` +
+    `📚 ระดับชั้น: ${studentGrade}\n` +
+    `✅ ถูก: ${quiz.correct} / ${TOTAL_Q} ข้อ\n` +
+    `❌ ผิด: ${quiz.wrong} ข้อ  (สูงสุด ${MAX_WRONG} ข้อ)\n` +
+    `⏱ เวลา: ${fmtTime(elapsed)} / ${fmtTime(targetSec)}\n` +
+    `─────────────────\n` +
+    `🎯 ผล: ${overall
+      ? '✅ ผ่านเกณฑ์! นักเรียนคล่องสูตรคูณ'
+      : '❌ ยังไม่ผ่าน — ' + obSub}\n` +
+    `📅 ${today}\n` +
+    `─────────────────\n` +
+    `🎓 ครูแซม`;
+
+  showScreen('screen-result');
+}
+
+function copyShare() {
+  const text = document.getElementById('share-text').textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => toast('✅ คัดลอกแล้ว!'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    toast('✅ คัดลอกแล้ว!');
+  }
+}
+</script>
+</body>
+</html>
