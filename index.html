@@ -5,6 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ถอยหลัง 132 ข้อ — ครูแซม</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Kanit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDnaCqCz23xPywX8NBnFLmvxhPwta-9hrw",
+    authDomain: "krusamm-reverse-times-quiz.firebaseapp.com",
+    projectId: "krusamm-reverse-times-quiz",
+    storageBucket: "krusamm-reverse-times-quiz.firebasestorage.app",
+    messagingSenderId: "213184500766",
+    appId: "1:213184500766:web:afd0015d84c0d20e06ca0f",
+    measurementId: "G-F5RKVHBHE7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // เปิดให้ฟังก์ชัน saveToSheet เรียกใช้ได้จาก global scope
+  window._saveToFirestore = async function(data) {
+    await addDoc(collection(db, "quiz_results"), data);
+  };
+</script>
 <style>
 :root {
   --blue1:   #1565C0;
@@ -597,20 +619,19 @@ function finishQuiz() {
   showScreen('screen-result');
 }
 
-// ── GOOGLE SHEETS ──
-const SHEET_URL = 'YOUR_APPS_SCRIPT_URL_HERE'; // ← วางลิงก์ Apps Script ที่นี่
-
+// ── FIREBASE FIRESTORE ──
 async function saveToSheet(data) {
   try {
-    await fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    toast('✅ บันทึกผลลง Google Sheets แล้ว!');
+    if (typeof window._saveToFirestore === 'function') {
+      await window._saveToFirestore(data);
+      toast('✅ บันทึกผลลง Firebase แล้ว!');
+    } else {
+      // Firebase ยังโหลดไม่เสร็จ — ลองใหม่อีกครั้ง
+      setTimeout(() => saveToSheet(data), 1000);
+    }
   } catch (e) {
-    toast('⚠️ บันทึกไม่สำเร็จ ตรวจสอบ URL');
+    console.error('Firebase error:', e);
+    toast('⚠️ บันทึกไม่สำเร็จ: ' + e.message);
   }
 }
 
