@@ -3,176 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>วัดผลสูตรคูณ — ครูแซม คณิตตรงจุด ติด TURBO </title>
+<title>ถอยหลัง 132 ข้อ — ครูแซม</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Kanit:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy: #0D1B3E;
-  --blue: #1A3A8F;
-  --gold: #F5A623;
-  --green: #06D6A0;
-  --red: #EF476F;
-  --bg: #F0F4FF;
-  --card: #FFFFFF;
-  --text: #0D1B3E;
-  --muted: #6B7A9F;
-  --border: #D0D8F0;
+  --blue1:   #1565C0;
+  --blue2:   #1E88E5;
+  --blue3:   #0D47A1;
+  --lavender:#E3F2FD;
+  --lavender2:#EEF6FF;
+  --bg:      #EEF6FF;
+  --card:    #FFFFFF;
+  --text:    #0D2B5E;
+  --muted:   #6B8BAC;
+  --border:  #C8DDF5;
+  --green:   #06D6A0;
+  --red:     #EF476F;
+  --gold:    #F5A623;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-.header {
-  background: var(--navy); padding: 14px 20px;
-  display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 16px rgba(13,27,62,0.3);
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,var(--blue3) 0%,var(--blue1) 100%);
+  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(13,71,161,0.35);
 }
-.logo { font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 700; color: var(--gold); }
-.logo span { color: #fff; font-weight: 400; }
-.header-badge { background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-family: 'Kanit', sans-serif; }
+.logo{font-family:'Kanit',sans-serif;font-size:17px;font-weight:700;color:#BBDEFB}
+.logo span{color:#fff;font-weight:400}
+.header-badge{background:var(--blue2);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;font-family:'Kanit',sans-serif;border:1px solid rgba(255,255,255,0.3)}
 
-.screen { display: none; animation: fadeIn 0.3s ease; }
-.screen.active { display: block; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)} }
-.container { max-width: 560px; margin: 0 auto; padding: 20px 16px 48px; }
+.screen{display:none;animation:fadeIn 0.3s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.container{max-width:520px;margin:0 auto;padding:20px 16px 56px}
 
-/* HERO */
-.hero { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); border-radius: 20px; padding: 28px 24px; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; }
-.hero::before { content:'×'; position:absolute; font-size:160px; font-family:'Kanit',sans-serif; color:rgba(255,255,255,0.04); right:-20px; top:-30px; line-height:1; }
-.hero-title { font-family:'Kanit',sans-serif; font-size:26px; font-weight:900; color:#fff; line-height:1.2; margin-bottom:8px; }
-.hero-title span { color: var(--gold); }
-.hero-sub { font-size:13px; color:rgba(255,255,255,0.75); margin-bottom:18px; line-height:1.6; }
-.brand-tag { display:inline-block; background:rgba(245,166,35,0.2); border:1px solid var(--gold); color:var(--gold); font-size:12px; font-weight:600; padding:4px 14px; border-radius:20px; }
-
-/* MODE CARDS */
-.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.mode-card { background: var(--card); border-radius: 16px; padding: 18px 14px; border: 2px solid var(--border); text-align: center; cursor: pointer; transition: all 0.2s; }
-.mode-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,58,143,0.15); }
-.mode-icon { font-size: 32px; margin-bottom: 8px; }
-.mode-title { font-family: 'Kanit', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.mode-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
-.mode-badge { display:inline-block; background: var(--gold); color: var(--navy); font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-top:4px; }
+/* ── HOME ── */
+.hero{
+  background:linear-gradient(135deg,var(--blue3) 0%,var(--blue1) 100%);
+  border-radius:24px;padding:32px 24px 28px;text-align:center;margin-bottom:20px;
+  position:relative;overflow:hidden;
+  box-shadow:0 12px 40px rgba(13,71,161,0.35);
+}
+.hero::before{content:'🔄';position:absolute;font-size:130px;right:-20px;top:-20px;opacity:0.08;line-height:1}
+.hero-icon{font-size:52px;margin-bottom:12px;animation:spin 8s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hero-title{font-family:'Kanit',sans-serif;font-size:28px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero-title span{color:#BBDEFB}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:6px;line-height:1.7}
+.hero-sub2{font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:18px}
+.brand-tag{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:12px;font-weight:600;padding:5px 16px;border-radius:20px}
 
 /* CRITERIA */
-.criteria-card { background: var(--card); border-radius: 16px; padding: 18px; margin-bottom: 20px; border: 1px solid var(--border); }
-.criteria-title { font-family:'Kanit',sans-serif; font-size:14px; font-weight:700; color:var(--navy); margin-bottom:10px; }
-.criteria-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:12px; }
-.criteria-row:last-child { border-bottom:none; }
-.criteria-row .grade { font-weight:700; color:var(--navy); }
-.criteria-row .time { font-family:'Kanit',sans-serif; font-size:12px; font-weight:700; color:var(--blue); background:var(--bg); padding:2px 8px; border-radius:6px; }
+.criteria-card{background:var(--card);border-radius:18px;padding:18px;margin-bottom:14px;border:2px solid var(--border);box-shadow:0 4px 16px rgba(21,101,192,0.08)}
+.criteria-title{font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;color:var(--blue3);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.criteria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.crit-box{background:var(--lavender2);border-radius:12px;padding:10px 6px;text-align:center;border:1px solid var(--border)}
+.crit-grade{font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;color:var(--blue3);margin-bottom:3px}
+.crit-time{font-family:'Kanit',sans-serif;font-size:15px;font-weight:900;color:var(--blue1)}
+.crit-note{font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5;padding:8px;background:var(--lavender2);border-radius:8px}
 
 /* FORM */
-.form-card { background: var(--card); border-radius: 16px; padding: 22px; margin-bottom: 14px; border: 1px solid var(--border); }
-.form-title { font-family:'Kanit',sans-serif; font-size:15px; font-weight:700; color:var(--navy); margin-bottom:14px; }
-.form-group { margin-bottom: 12px; }
-label { display:block; font-size:12px; font-weight:600; color:var(--muted); margin-bottom:4px; }
-input[type="text"], select { width:100%; padding:11px 14px; border:2px solid var(--border); border-radius:10px; font-family:'Sarabun',sans-serif; font-size:14px; color:var(--text); background:var(--bg); outline:none; transition:border-color 0.2s; appearance:none; }
-input[type="text"]:focus, select:focus { border-color:var(--blue); background:#fff; }
+.form-card{background:var(--card);border-radius:18px;padding:24px;margin-bottom:16px;border:2px solid var(--border);box-shadow:0 4px 16px rgba(21,101,192,0.08)}
+.form-title{font-family:'Kanit',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px}
+.form-group{margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px}
+input[type="text"],select{
+  width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;
+  font-family:'Sarabun',sans-serif;font-size:15px;color:var(--text);background:var(--bg);
+  outline:none;transition:border-color 0.2s;appearance:none;
+}
+input:focus,select:focus{border-color:var(--blue1);background:#fff}
 
-/* QUIZ INFO BOX */
-.quiz-info-box { background: var(--bg); border-radius: 10px; padding: 12px 14px; margin-top: 10px; border: 1px solid var(--border); }
-.quiz-info-row { display:flex; justify-content:space-between; font-size:12px; color:var(--muted); padding:3px 0; }
-.quiz-info-row strong { color:var(--navy); font-weight:700; }
+.quiz-info-box{background:var(--lavender2);border-radius:12px;padding:12px 14px;margin-top:12px;border:1px solid var(--border)}
+.quiz-info-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:4px 0}
+.quiz-info-row strong{color:var(--text);font-weight:700}
 
 /* BUTTONS */
-.btn { display:block; width:100%; padding:14px; border:none; border-radius:12px; font-family:'Kanit',sans-serif; font-size:16px; font-weight:700; cursor:pointer; transition:all 0.2s; text-align:center; margin-bottom:10px; }
-.btn-primary { background:linear-gradient(135deg,var(--blue),var(--navy)); color:#fff; box-shadow:0 6px 20px rgba(26,58,143,0.3); }
-.btn-primary:hover { transform:translateY(-2px); }
-.btn-gold { background:linear-gradient(135deg,var(--gold),#e8950f); color:var(--navy); box-shadow:0 6px 20px rgba(245,166,35,0.3); }
-.btn-gold:hover { transform:translateY(-2px); }
-.btn-outline { background:transparent; color:var(--blue); border:2px solid var(--blue); }
-.btn-outline:hover { background:var(--bg); }
-.btn:disabled { opacity:0.4; cursor:not-allowed; transform:none !important; }
+.btn{display:block;width:100%;padding:15px;border:none;border-radius:14px;font-family:'Kanit',sans-serif;font-size:17px;font-weight:700;cursor:pointer;transition:all 0.2s;text-align:center;margin-bottom:10px}
+.btn-purple{background:linear-gradient(135deg,var(--blue1),var(--blue3));color:#fff;box-shadow:0 6px 24px rgba(21,101,192,0.35)}
+.btn-purple:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(21,101,192,0.4)}
+.btn-outline{background:transparent;color:var(--blue1);border:2px solid var(--blue1)}
+.btn-outline:hover{background:var(--lavender)}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none!important}
 
-/* ── QUIZ SCREEN ── */
-.quiz-header { background:linear-gradient(135deg,var(--navy),var(--blue)); border-radius:20px; padding:18px 20px; margin-bottom:14px; color:#fff; }
-.quiz-top-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.quiz-mode-tag { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); font-family:'Kanit',sans-serif; font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px; }
-.quiz-counter-big { font-family:'Kanit',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); }
-.quiz-progress-bar-wrap { background:rgba(255,255,255,0.15); border-radius:10px; height:5px; margin-bottom:12px; overflow:hidden; }
-.quiz-progress-bar { background:var(--gold); height:100%; border-radius:10px; transition:width 0.4s; }
-.quiz-timer-display { font-family:'Kanit',sans-serif; font-size:60px; font-weight:900; line-height:1; letter-spacing:-2px; text-align:center; margin:4px 0 8px; }
-.quiz-timer-display.warning { color:var(--gold); }
-.quiz-timer-display.danger { color:var(--red); animation:pulse 0.5s infinite alternate; }
-@keyframes pulse { from{opacity:1}to{opacity:0.6} }
-.quiz-score-row { display:flex; justify-content:space-around; font-size:12px; color:rgba(255,255,255,0.8); }
-.quiz-score-item { text-align:center; }
-.quiz-score-item .val { font-family:'Kanit',sans-serif; font-size:20px; font-weight:900; color:#fff; line-height:1; }
-.quiz-score-item .lbl { font-size:10px; color:rgba(255,255,255,0.6); margin-top:2px; }
+/* ── QUIZ ── */
+.quiz-header{background:linear-gradient(135deg,var(--blue3),var(--blue1));border-radius:20px;padding:18px 20px;margin-bottom:14px;color:#fff;box-shadow:0 8px 28px rgba(13,71,161,0.3)}
+.quiz-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.quiz-mode-tag{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);font-family:'Kanit',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px}
+.quiz-counter-big{font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.85)}
+.quiz-progress-bar-wrap{background:rgba(255,255,255,0.15);border-radius:10px;height:5px;margin-bottom:12px;overflow:hidden}
+.quiz-progress-bar{background:#BBDEFB;height:100%;border-radius:10px;transition:width 0.4s}
+.quiz-timer-display{font-family:'Kanit',sans-serif;font-size:62px;font-weight:900;line-height:1;letter-spacing:-2px;text-align:center;margin:4px 0 8px}
+.quiz-timer-display.warning{color:var(--gold)}
+.quiz-timer-display.danger{color:var(--red);animation:pulse 0.5s infinite alternate}
+@keyframes pulse{from{opacity:1}to{opacity:0.6}}
+.quiz-score-row{display:flex;justify-content:space-around;font-size:12px;color:rgba(255,255,255,0.75)}
+.quiz-score-item{text-align:center}
+.quiz-score-item .val{font-family:'Kanit',sans-serif;font-size:20px;font-weight:900;color:#fff;line-height:1}
+.quiz-score-item .lbl{font-size:10px;color:rgba(255,255,255,0.6);margin-top:2px}
 
 /* QUESTION */
-.question-card { background:var(--card); border-radius:18px; padding:24px 20px; text-align:center; margin-bottom:14px; border:1px solid var(--border); box-shadow:0 4px 20px rgba(13,27,62,0.07); }
-.question-text { font-family:'Kanit',sans-serif; font-size:44px; font-weight:900; color:var(--navy); line-height:1.1; margin-bottom:4px; }
-.question-sub { font-size:12px; color:var(--muted); }
+.question-card{background:var(--card);border-radius:20px;padding:28px 20px;text-align:center;margin-bottom:14px;border:2px solid var(--border);box-shadow:0 6px 24px rgba(21,101,192,0.1)}
+.question-text{font-family:'Kanit',sans-serif;font-size:48px;font-weight:900;color:var(--text);line-height:1.1;margin-bottom:6px}
+.question-sub{font-size:12px;color:var(--muted)}
 
 /* CHOICES */
-.choices-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
-.choice-btn { background:var(--card); border:2px solid var(--border); border-radius:14px; padding:16px 10px; font-family:'Kanit',sans-serif; font-size:28px; font-weight:700; color:var(--navy); cursor:pointer; transition:all 0.15s; text-align:center; box-shadow:0 2px 8px rgba(13,27,62,0.06); }
-.choice-btn:hover:not(:disabled) { border-color:var(--blue); background:var(--bg); transform:translateY(-2px); }
-.choice-btn.correct { background:rgba(6,214,160,0.15); border-color:var(--green); color:var(--green); }
-.choice-btn.wrong { background:rgba(239,71,111,0.12); border-color:var(--red); color:var(--red); }
-.choice-btn.reveal { background:rgba(6,214,160,0.1); border-color:var(--green); color:var(--green); }
-.choice-btn:disabled { cursor:not-allowed; }
+.choices-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.choice-btn{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:18px 10px;font-family:'Kanit',sans-serif;font-size:30px;font-weight:700;color:var(--text);cursor:pointer;transition:all 0.15s;text-align:center;box-shadow:0 2px 8px rgba(21,101,192,0.06)}
+.choice-btn:hover:not(:disabled){border-color:var(--blue1);background:var(--lavender);transform:translateY(-2px)}
+.choice-btn.correct{background:rgba(6,214,160,0.15);border-color:var(--green);color:var(--green)}
+.choice-btn.wrong{background:rgba(239,71,111,0.12);border-color:var(--red);color:var(--red)}
+.choice-btn.reveal{background:rgba(6,214,160,0.1);border-color:var(--green);color:var(--green)}
+.choice-btn:disabled{cursor:not-allowed}
 
-.feedback-bar { border-radius:12px; padding:10px 14px; text-align:center; margin-bottom:10px; font-family:'Kanit',sans-serif; font-size:14px; font-weight:700; display:none; }
-.feedback-bar.correct { background:rgba(6,214,160,0.15); color:var(--green); }
-.feedback-bar.wrong { background:rgba(239,71,111,0.12); color:var(--red); }
-
-/* TIMER SCREEN */
-.timer-header { background:linear-gradient(135deg,var(--navy),var(--blue)); border-radius:20px; padding:22px; text-align:center; margin-bottom:14px; color:#fff; }
-.round-badge { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; margin-bottom:8px; font-family:'Kanit',sans-serif; }
-.timer-display { font-family:'Kanit',sans-serif; font-size:68px; font-weight:900; line-height:1; letter-spacing:-2px; margin:4px 0; transition:color 0.3s; }
-.timer-display.warning { color:var(--gold); }
-.timer-display.danger { color:var(--red); animation:pulse 0.5s infinite alternate; }
-.timer-sub { font-size:12px; color:rgba(255,255,255,0.65); }
-.target-info { background:rgba(255,255,255,0.1); border-radius:10px; padding:8px 14px; margin-top:10px; font-size:12px; color:rgba(255,255,255,0.85); }
-.target-info strong { color:var(--gold); }
-.round-progress { background:var(--card); border-radius:14px; padding:14px; margin-bottom:12px; border:1px solid var(--border); }
-.rp-title { font-size:11px; color:var(--muted); font-weight:600; margin-bottom:8px; }
-.rp-dots { display:flex; gap:10px; }
-.rp-dot { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Kanit',sans-serif; font-size:13px; font-weight:700; border:2px solid var(--border); color:var(--muted); background:var(--bg); transition:all 0.3s; }
-.rp-dot.pass { background:var(--green); border-color:var(--green); color:#fff; }
-.rp-dot.fail { background:var(--red); border-color:var(--red); color:#fff; }
-.rp-dot.active { border-color:var(--blue); color:var(--blue); background:#fff; box-shadow:0 0 0 3px rgba(26,58,143,0.15); }
-.timer-controls { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
-.timer-controls .btn { margin-bottom:0; }
-
-/* HISTORY */
-.section-title { font-family:'Kanit',sans-serif; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
-.history-list { display:flex; flex-direction:column; gap:7px; }
-.history-item { display:flex; align-items:center; justify-content:space-between; background:var(--card); border-radius:10px; padding:10px 14px; border:1px solid var(--border); }
-.history-item .round-num { font-size:11px; color:var(--muted); }
-.history-item .round-time { font-family:'Kanit',sans-serif; font-size:16px; font-weight:700; }
-.history-item .round-result { font-size:11px; font-weight:700; padding:3px 9px; border-radius:7px; }
-.history-item .round-result.pass { background:rgba(6,214,160,0.15); color:var(--green); }
-.history-item .round-result.fail { background:rgba(239,71,111,0.15); color:var(--red); }
+.feedback-bar{border-radius:14px;padding:11px 16px;text-align:center;margin-bottom:10px;font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;display:none}
+.feedback-bar.correct{background:rgba(6,214,160,0.15);color:var(--green)}
+.feedback-bar.wrong{background:rgba(239,71,111,0.12);color:var(--red)}
 
 /* RESULT */
-.result-hero { border-radius:20px; padding:28px 22px; text-align:center; margin-bottom:14px; color:#fff; }
-.result-hero.result-pass { background:linear-gradient(135deg,#048a6a,var(--green)); }
-.result-hero.result-fail { background:linear-gradient(135deg,#b0314f,var(--red)); }
-.result-icon { font-size:48px; margin-bottom:8px; }
-.result-title { font-family:'Kanit',sans-serif; font-size:24px; font-weight:900; margin-bottom:4px; }
-.result-name { font-size:14px; opacity:0.9; }
-.result-grade { display:inline-block; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; margin-top:8px; }
-.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
-.stat-box { background:var(--card); border-radius:12px; padding:12px 8px; text-align:center; border:1px solid var(--border); }
-.stat-box .s-num { font-family:'Kanit',sans-serif; font-size:20px; font-weight:900; color:var(--navy); }
-.stat-box .s-lbl { font-size:10px; color:var(--muted); margin-top:2px; }
-.share-card { background:var(--navy); border-radius:16px; padding:20px; margin-bottom:14px; color:#fff; position:relative; overflow:hidden; }
-.share-card::after { content:'🏆'; position:absolute; font-size:70px; right:10px; bottom:-10px; opacity:0.12; }
-.share-title { font-family:'Kanit',sans-serif; font-size:11px; color:var(--gold); font-weight:700; margin-bottom:8px; letter-spacing:1px; text-transform:uppercase; }
-.share-text { font-size:12px; line-height:1.7; color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.08); border-radius:10px; padding:12px; margin-bottom:10px; white-space:pre-wrap; }
-.divider { height:1px; background:var(--border); margin:12px 0; }
+.result-hero{border-radius:24px;padding:30px 22px;text-align:center;margin-bottom:16px;color:#fff}
+.result-hero.result-pass{background:linear-gradient(135deg,#0D47A1,var(--blue1))}
+.result-hero.result-fail{background:linear-gradient(135deg,#b0314f,var(--red))}
+.result-icon{font-size:52px;margin-bottom:8px}
+.result-title{font-family:'Kanit',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px}
+.result-name{font-size:14px;opacity:0.9;margin-bottom:6px}
+.result-grade{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);padding:4px 14px;border-radius:20px;font-size:11px;font-weight:600}
 
-.toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--navy); color:#fff; padding:10px 20px; border-radius:40px; font-size:13px; font-weight:600; z-index:9999; transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); white-space:nowrap; box-shadow:0 8px 30px rgba(0,0,0,0.25); }
-.toast.show { transform:translateX(-50%) translateY(0); }
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat-box{background:var(--card);border-radius:14px;padding:13px 8px;text-align:center;border:2px solid var(--border)}
+.stat-box .s-num{font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:var(--blue1)}
+.stat-box .s-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+
+.history-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.history-item{display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:12px;padding:11px 16px;border:1px solid var(--border)}
+.history-item .round-num{font-size:11px;color:var(--muted)}
+.history-item .round-time{font-family:'Kanit',sans-serif;font-size:17px;font-weight:700;color:var(--text)}
+.history-item .round-result{font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px}
+.history-item .round-result.pass{background:rgba(6,214,160,0.15);color:var(--green)}
+.history-item .round-result.fail{background:rgba(239,71,111,0.15);color:var(--red)}
+
+.share-card{background:linear-gradient(135deg,var(--blue3),var(--blue1));border-radius:18px;padding:20px;margin-bottom:14px;color:#fff}
+.share-title{font-family:'Kanit',sans-serif;font-size:11px;color:#BBDEFB;font-weight:700;margin-bottom:8px;letter-spacing:1px;text-transform:uppercase}
+.share-text{font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.1);border-radius:10px;padding:12px;margin-bottom:10px;white-space:pre-wrap}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#e8950f);color:#1a1a1a;box-shadow:0 6px 20px rgba(245,166,35,0.35)}
+.btn-gold:hover{transform:translateY(-2px)}
+
+.section-title{font-family:'Kanit',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.divider{height:1px;background:var(--border);margin:14px 0}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--blue3);color:#fff;padding:10px 22px;border-radius:40px;font-size:13px;font-weight:600;z-index:9999;transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,0.25)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Reward banner */
+.reward-banner{background:linear-gradient(135deg,#1e88e5,#0d47a1);border-radius:20px;padding:24px;text-align:center;margin-bottom:14px;box-shadow:0 10px 32px rgba(13,71,161,0.45)}
+.reward-icon{font-size:54px;margin-bottom:8px}
+.reward-title{font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:4px}
+.reward-sub{font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:10px}
+.reward-badge{background:rgba(255,255,255,0.2);border-radius:12px;padding:10px 18px;display:inline-block}
+.reward-badge-text{font-family:'Kanit',sans-serif;font-size:15px;font-weight:800;color:#fff}
+.reward-badge-sub{font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px}
+
+/* LINE CONTACT CARD */
+.line-card {
+  background: linear-gradient(135deg, #06C755 0%, #04A340 100%);
+  border-radius: 20px; padding: 24px 20px; margin-bottom: 14px;
+  text-align: center; color: #fff;
+  box-shadow: 0 10px 32px rgba(6,199,85,0.35);
+  position: relative; overflow: hidden;
+}
+.line-card::before { content:'LINE'; position:absolute; font-size:90px; font-weight:900;
+  color:rgba(255,255,255,0.06); right:-8px; bottom:-14px; line-height:1;
+  font-family:'Kanit',sans-serif; pointer-events:none; }
+.line-card-title { font-family:'Kanit',sans-serif; font-size:15px; font-weight:900;
+  margin-bottom:3px; }
+.line-card-tagline { font-size:12px; color:rgba(255,255,255,0.88); margin-bottom:14px;
+  line-height:1.6; }
+.line-qr { width:130px; height:130px; border-radius:14px; background:#fff; padding:5px;
+  margin:0 auto 12px; display:block; box-shadow:0 4px 16px rgba(0,0,0,0.2); }
+.line-id-box { display:inline-block; background:rgba(255,255,255,0.22);
+  border:1px solid rgba(255,255,255,0.45); border-radius:10px;
+  padding:6px 18px; font-family:'Kanit',sans-serif; font-size:17px; font-weight:900;
+  letter-spacing:1px; margin-bottom:12px; }
+.btn-line-add { display:inline-block; background:#fff; color:#06C755;
+  font-family:'Kanit',sans-serif; font-size:15px; font-weight:800;
+  padding:11px 28px; border-radius:30px; text-decoration:none;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15); transition:transform 0.2s; }
+.btn-line-add:hover { transform:translateY(-2px); }
+
 </style>
 </head>
 <body>
 <div class="header">
   <div class="logo">ครู<span>แซม</span></div>
-  <div class="header-badge">วัดผลสูตรคูณ</div>
+  <div class="header-badge">🔄 ถอยหลัง</div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -180,101 +205,36 @@ input[type="text"]:focus, select:focus { border-color:var(--blue); background:#f
 <div class="screen active" id="screen-home">
   <div class="container">
     <div class="hero">
-      <div class="hero-title">วัดผล<span>สูตรคูณ</span></div>
-      <div class="hero-sub">เลือกโหมดทดสอบที่ต้องการ<br>แม่ 2–12 ครบทุกตัว</div>
-      <div class="brand-tag">ครูแซม คณิตตรงจุด ติด TURBO </div>
-    </div>
-
-    <div class="mode-grid">
-      <div class="mode-card" onclick="showSetup('q20')">
-        <div class="mode-icon">⚡</div>
-        <div class="mode-title">Quiz 20 ข้อ</div>
-        <div class="mode-desc">เวลา 80 วิ<br>ผ่าน: ≥80% + ทันเวลา</div>
-        <div class="mode-badge">4 ตัวเลือก</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('q30')">
-        <div class="mode-icon">🧠</div>
-        <div class="mode-title">Quiz 30 ข้อ</div>
-        <div class="mode-desc">เวลา 120 วิ<br>ผ่าน: ≥80% + ทันเวลา</div>
-        <div class="mode-badge">4 ตัวเลือก</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('q40')">
-        <div class="mode-icon">🎯</div>
-        <div class="mode-title">Quiz 40 ข้อ</div>
-        <div class="mode-desc">เวลา 160 วิ<br>ผ่าน: ≥80% + ทันเวลา</div>
-        <div class="mode-badge">4 ตัวเลือก</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('q55')">
-        <div class="mode-icon">🔥</div>
-        <div class="mode-title">Quiz 55 ข้อ</div>
-        <div class="mode-desc">เวลา 240 วิ<br>ผ่าน: ≥80% + ทันเวลา</div>
-        <div class="mode-badge">4 ตัวเลือก</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('q144')">
-        <div class="mode-icon">👑</div>
-        <div class="mode-title">Quiz 132 ข้อ</div>
-        <div class="mode-desc">ครบทุกตัวคูณ<br>ผิดได้ไม่เกิน 15 ข้อ</div>
-        <div class="mode-badge" style="background:var(--red);color:#fff;">Master</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('mission144')" style="border:2px solid var(--gold);background:linear-gradient(135deg,#fffbe6,#fff8d6);">
-        <div class="mode-icon">🏅</div>
-        <div class="mode-title" style="color:#b8760a;">ภารกิจ 132 ข้อ</div>
-        <div class="mode-desc" style="color:#a06010;">ครบ 132 ข้อ ใน 300 วิ<br>ผิดได้ไม่เกิน 5 ข้อ</div>
-        <div class="mode-badge" style="background:var(--gold);color:var(--navy);">🎁 มีรางวัล!</div>
-      </div>
-      <div class="mode-card" onclick="startStopwatch()">
-        <div class="mode-icon">⏱️</div>
-        <div class="mode-title">จับเวลาเขียน</div>
-        <div class="mode-desc">นาฬิกาจับเวลา<br>กดเริ่ม / หยุด / รีเซ็ต</div>
-        <div class="mode-badge" style="background:var(--blue);">Stopwatch</div>
-      </div>
-      <div class="mode-card" onclick="showSetup('reverse144')" style="border:2px solid #9b59b6;background:linear-gradient(135deg,#f5eeff,#ede5ff);">
-        <div class="mode-icon">🔄</div>
-        <div class="mode-title" style="color:#6c3483;">ถอยหลัง 132 ข้อ</div>
-        <div class="mode-desc" style="color:#7d3c98;">2×12 → 12×2<br>นับถอยหลัง ตามระดับชั้น</div>
-        <div class="mode-badge" style="background:#9b59b6;color:#fff;">Reverse</div>
-      </div>
+      <div class="hero-icon">🔄</div>
+      <div class="hero-title">ถอยหลัง <span>132 ข้อ</span></div>
+      <div class="hero-sub">2×12 → 12×1 · นับถอยหลัง<br>ท่องจากปลายกลับต้น</div>
+      <div class="hero-sub2">ทดสอบความจำแบบย้อนกลับ</div>
+      <div class="brand-tag">ครูแซม คณิตตรงจุด ติด TURBO</div>
     </div>
 
     <div class="criteria-card">
-      <div class="criteria-title">🎯 เกณฑ์ผล (Quiz 20/30/40/55 ข้อ)</div>
-      <div class="criteria-row"><span class="grade">🌟 ดีเยี่ยม</span><span class="time">100%</span></div>
-      <div class="criteria-row"><span class="grade">🏆 ดีมาก</span><span class="time">90–99%</span></div>
-      <div class="criteria-row"><span class="grade">👍 ดี</span><span class="time">80–89%</span></div>
-      <div class="criteria-row" style="color:var(--muted);font-size:11px;"><span>* ต้องทำทันเวลาด้วย</span></div>
+      <div class="criteria-title">📏 เกณฑ์เวลาตามระดับชั้น</div>
+      <div class="criteria-grid">
+        <div class="crit-box"><div class="crit-grade">อ.2</div><div class="crit-time">8:30</div></div>
+        <div class="crit-box"><div class="crit-grade">อ.3</div><div class="crit-time">8:00</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.1</div><div class="crit-time">7:30</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.2</div><div class="crit-time">7:00</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.3</div><div class="crit-time">6:30</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.4</div><div class="crit-time">6:00</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.5</div><div class="crit-time">5:30</div></div>
+        <div class="crit-box"><div class="crit-grade">ป.6</div><div class="crit-time">5:00</div></div>
+      </div>
+      <div class="crit-note">* ตอบครบ 132 ข้อ ก่อนเวลาหมด = ผ่าน · ผิดได้ไม่เกิน 13 ข้อ</div>
     </div>
-    <div class="criteria-card">
-      <div class="criteria-title">🏅 ภารกิจ 132 ข้อ (รับรางวัล)</div>
-      <div class="criteria-row"><span class="grade">⏱ เวลา</span><span class="time">5:00 (300 วิ)</span></div>
-      <div class="criteria-row"><span class="grade">❌ ผิดได้ไม่เกิน</span><span class="time">5 ข้อ</span></div>
-      <div class="criteria-row" style="color:var(--muted);font-size:11px;"><span>* ผ่านทั้ง 2 เงื่อนไข = รับรางวัลพิเศษ 🎁 (ครบ 132 ข้อ)</span></div>
-    </div>
-    <div class="criteria-card" style="border-color:#9b59b6;">
-      <div class="criteria-title" style="color:#6c3483;">📏 ถอยหลัง 132 ข้อ — เกณฑ์เวลา (นับถอยหลัง)</div>
-      <div class="criteria-row"><span class="grade">ป.6</span><span class="time" style="color:#6c3483;">5:00</span></div>
-      <div class="criteria-row"><span class="grade">ป.5</span><span class="time" style="color:#6c3483;">5:30</span></div>
-      <div class="criteria-row"><span class="grade">ป.4</span><span class="time" style="color:#6c3483;">6:00</span></div>
-      <div class="criteria-row"><span class="grade">ป.3</span><span class="time" style="color:#6c3483;">6:30</span></div>
-      <div class="criteria-row"><span class="grade">ป.2</span><span class="time" style="color:#6c3483;">7:00</span></div>
-      <div class="criteria-row"><span class="grade">ป.1</span><span class="time" style="color:#6c3483;">7:30</span></div>
-      <div class="criteria-row"><span class="grade">อ.3</span><span class="time" style="color:#6c3483;">8:00</span></div>
-      <div class="criteria-row"><span class="grade">อ.2</span><span class="time" style="color:#6c3483;">8:30</span></div>
-      <div class="criteria-row" style="color:var(--muted);font-size:11px;"><span>* ตอบครบ 132 ข้อ ก่อนเวลาหมด = ผ่าน</span></div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══ SETUP ═══ -->
-<div class="screen" id="screen-setup">
-  <div class="container">
     <div class="form-card">
-      <div class="form-title" id="setup-title">ข้อมูลนักเรียน</div>
+      <div class="form-title">👤 ข้อมูลนักเรียน</div>
       <div class="form-group">
         <label>ชื่อ–นามสกุล</label>
         <input type="text" id="input-name" placeholder="เช่น น้องมิน สุขใจ">
       </div>
-      <div class="form-group" id="grade-group">
-        <label>ระดับชั้น <span id="grade-note" style="color:var(--muted);font-weight:400;">(สำหรับเกณฑ์เวลา)</span></label>
+      <div class="form-group">
+        <label>ระดับชั้น <span style="color:var(--muted);font-weight:400;text-transform:none;">(สำหรับเกณฑ์เวลา)</span></label>
         <select id="input-grade">
           <option value="">-- เลือกระดับชั้น --</option>
           <option value="อ.2|510">อนุบาล 2 (เป้า 8:30)</option>
@@ -287,15 +247,15 @@ input[type="text"]:focus, select:focus { border-color:var(--blue); background:#f
           <option value="ป.6|300">ประถม 6 (เป้า 5:00)</option>
         </select>
       </div>
-      <div class="quiz-info-box" id="quiz-info-box" style="display:none;">
-        <div class="quiz-info-row"><span>จำนวนข้อ</span><strong id="info-total">-</strong></div>
-        <div class="quiz-info-row"><span>เวลาที่กำหนด</span><strong id="info-time">-</strong></div>
-        <div class="quiz-info-row"><span>ผิดได้ไม่เกิน</span><strong id="info-wrong">-</strong></div>
-        <div class="quiz-info-row"><span>รูปแบบโจทย์</span><strong id="info-type">-</strong></div>
+      <div class="quiz-info-box">
+        <div class="quiz-info-row"><span>จำนวนข้อ</span><strong>132 ข้อ</strong></div>
+        <div class="quiz-info-row"><span>เวลาที่กำหนด</span><strong>นับถอยหลังตามระดับชั้น</strong></div>
+        <div class="quiz-info-row"><span>ผิดได้ไม่เกิน</span><strong>13 ข้อ</strong></div>
+        <div class="quiz-info-row"><span>รูปแบบโจทย์</span><strong>2×12=? → 12×1=? (นับถอยหลัง)</strong></div>
       </div>
     </div>
-    <button class="btn btn-gold" onclick="confirmSetup()">✓ ยืนยัน เริ่มทดสอบ</button>
-    <button class="btn btn-outline" onclick="showScreen('screen-home')">← กลับ</button>
+
+    <button class="btn btn-purple" onclick="confirmSetup()">🔄 เริ่มทดสอบถอยหลัง</button>
   </div>
 </div>
 
@@ -304,49 +264,26 @@ input[type="text"]:focus, select:focus { border-color:var(--blue); background:#f
   <div class="container">
     <div class="quiz-header">
       <div class="quiz-top-row">
-        <div class="quiz-mode-tag" id="quiz-mode-tag">Quiz 30 ข้อ</div>
-        <div class="quiz-counter-big" id="quiz-counter">1 / 30</div>
+        <div class="quiz-mode-tag">🔄 ถอยหลัง 132 ข้อ</div>
+        <div class="quiz-counter-big" id="quiz-counter">1 / 132</div>
       </div>
       <div class="quiz-progress-bar-wrap">
         <div class="quiz-progress-bar" id="quiz-progress-bar" style="width:0%"></div>
       </div>
-      <div class="quiz-timer-display" id="quiz-timer">02:00</div>
+      <div class="quiz-timer-display" id="quiz-timer">07:00</div>
       <div class="quiz-score-row">
         <div class="quiz-score-item"><div class="val" id="qs-correct">0</div><div class="lbl">✅ ถูก</div></div>
         <div class="quiz-score-item"><div class="val" id="qs-wrong">0</div><div class="lbl">❌ ผิด</div></div>
-        <div class="quiz-score-item"><div class="val" id="qs-maxwrong">5</div><div class="lbl">ผิดได้สูงสุด</div></div>
-        <div class="quiz-score-item"><div class="val" id="qs-remaining">20</div><div class="lbl">เหลือ (ข้อ)</div></div>
+        <div class="quiz-score-item"><div class="val" id="qs-maxwrong">13</div><div class="lbl">ผิดได้สูงสุด</div></div>
+        <div class="quiz-score-item"><div class="val" id="qs-remaining">132</div><div class="lbl">เหลือ (ข้อ)</div></div>
       </div>
     </div>
-
     <div class="question-card">
-      <div class="question-text" id="question-text">2 × 3 = ?</div>
+      <div class="question-text" id="question-text">2 × 12 = ?</div>
       <div class="question-sub" id="question-sub">เลือกคำตอบที่ถูกต้อง</div>
     </div>
-
     <div class="feedback-bar" id="feedback-bar"></div>
     <div class="choices-grid" id="choices-grid"></div>
-  </div>
-</div>
-
-<!-- ═══ STOPWATCH ═══ -->
-<div class="screen" id="screen-timer">
-  <div class="container">
-    <div class="timer-header" style="padding:30px 22px;">
-      <div style="font-family:'Kanit',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:6px;">⏱️ จับเวลาเขียนสูตรคูณ</div>
-      <div class="timer-display" id="timer-display" style="font-size:80px;letter-spacing:-3px;">00:00</div>
-      <div style="font-family:'Kanit',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;" id="timer-ms-display">00</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-      <button class="btn btn-primary" id="btn-start-stop" onclick="toggleStopwatch()" style="font-size:18px;padding:16px;">▶ เริ่ม</button>
-      <button class="btn btn-outline" id="btn-reset" onclick="resetStopwatch()" style="font-size:18px;padding:16px;">↺ รีเซ็ต</button>
-    </div>
-    <button class="btn btn-gold" id="btn-lap" onclick="recordLap()" disabled style="font-size:15px;">📌 จดเวลา (Lap)</button>
-    <div class="section-title" style="margin-top:16px;">เวลาที่จด</div>
-    <div class="history-list" id="history-list">
-      <div style="text-align:center;color:var(--muted);font-size:12px;padding:14px;">กดจดเวลาเพื่อบันทึก</div>
-    </div>
-    <button class="btn btn-outline" onclick="showScreen('screen-home')" style="margin-top:8px;">← กลับหน้าหลัก</button>
   </div>
 </div>
 
@@ -361,7 +298,7 @@ input[type="text"]:focus, select:focus { border-color:var(--blue); background:#f
     </div>
     <div class="stat-grid" id="stat-grid"></div>
     <div id="reward-banner"></div>
-    <div class="section-title" id="result-detail-title">สรุปผล</div>
+    <div class="section-title">สรุปผลถอยหลัง 132 ข้อ</div>
     <div class="history-list" id="result-history"></div>
     <div class="divider"></div>
     <div class="share-card">
@@ -369,35 +306,33 @@ input[type="text"]:focus, select:focus { border-color:var(--blue); background:#f
       <div class="share-text" id="share-text"></div>
       <button class="btn btn-gold" onclick="copyShare()">📋 คัดลอกข้อความแชร์</button>
     </div>
-    <button class="btn btn-primary" onclick="showScreen('screen-home')">ทดสอบอีกครั้ง</button>
+
+    <!-- LINE Contact -->
+    <div class="line-card">
+      <div class="line-card-title">💬 อยากรู้ว่าต้องทำอะไรต่อ?</div>
+      <div class="line-card-tagline">จากผลนี้ ลูกควรฝึกตรงไหนก่อน?<br>ทักครูแซมได้เลยครับ — <strong>ฟรี ไม่มีเงื่อนไข</strong></div>
+      <img class="line-qr" src="data:image/jpeg;base64,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" alt="QR LINE ครูแซม">
+      <div class="line-id-box">sam2206</div><br>
+      <a class="btn-line-add" href="https://line.me/ti/p/u4uNsMIB9f" target="_blank">➕ เพิ่มเพื่อน LINE</a>
+    </div>
+    <button class="btn btn-purple" onclick="goHome()">🔄 ทดสอบอีกครั้ง</button>
   </div>
 </div>
 
 <script>
-// ── QUIZ CONFIG ────────────────────────────────────────────────────
-const QUIZ_CONFIG = {
-  q20:  { total:20,  timeSec:80,  maxWrong:5,  label:'Quiz 20 ข้อ',  type:'choice4' },
-  q30:  { total:30,  timeSec:120, maxWrong:7,  label:'Quiz 30 ข้อ',  type:'choice4' },
-  q40:  { total:40,  timeSec:160, maxWrong:9,  label:'Quiz 40 ข้อ',  type:'choice4' },
-  q55:  { total:55,  timeSec:240, maxWrong:11, label:'Quiz 55 ข้อ',  type:'choice4' },
-  q144: { total:132, timeSec:null,maxWrong:15, label:'Quiz 132 ข้อ', type:'fill4' },
-  mission144: { total:132, timeSec:300, maxWrong:5, label:'ภารกิจ 132 ข้อ', type:'fill4' },
-  reverse144: { total:132, timeSec:null, maxWrong:13, label:'ถอยหลัง 132 ข้อ', type:'reverse4' },
-};
+// ── CONFIG ──
+const CFG = { total:132, timeSec:null, maxWrong:13, label:'ถอยหลัง 132 ข้อ' };
 
-// ── STATE ──────────────────────────────────────────────────────────
-let currentMode = '';
-let studentName = '', studentGrade = '', targetSec = 300;
+// ── STATE ──
+let studentName = '', studentGrade = '', targetSec = 420;
 let quiz = {};
-let timer = {};
 
-// ── HELPERS ────────────────────────────────────────────────────────
+// ── HELPERS ──
 function fmtTime(sec) {
   if (sec == null) return '--';
   const m = Math.floor(sec/60), s = sec%60;
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
-function fmtTimeMs(ms) { return fmtTime(Math.floor(ms/1000)); }
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -408,74 +343,25 @@ function toast(msg) {
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
 }
-
-// ── SETUP ──────────────────────────────────────────────────────────
-function showSetup(mode) {
-  currentMode = mode;
-  const isTimer = mode === 'timer';
-  const cfg = QUIZ_CONFIG[mode];
-
-  document.getElementById('setup-title').textContent =
-    isTimer ? '⏱️ จับเวลาเขียน — ข้อมูลนักเรียน' : `🧠 ${cfg.label} — ข้อมูลนักเรียน`;
-
-  // grade needed for q144 & reverse144 only
-  const gradeGroup = document.getElementById('grade-group');
-  const gradeNote = document.getElementById('grade-note');
-  if (mode === 'q144' || mode === 'reverse144') {
-    gradeGroup.style.display = 'block';
-    gradeNote.textContent = '(สำหรับเกณฑ์เวลา)';
-  } else {
-    gradeGroup.style.display = 'none';
-  }
-
-  // info box
-  const box = document.getElementById('quiz-info-box');
-  if (cfg) {
-    box.style.display = 'block';
-    document.getElementById('info-total').textContent = cfg.total + ' ข้อ';
-    document.getElementById('info-time').textContent = (mode === 'mission144') ? '300 วินาที (5:00)' : (mode === 'reverse144') ? 'นับถอยหลังตามระดับชั้น' : (cfg.timeSec ? cfg.timeSec + ' วินาที' : 'ตามระดับชั้น');
-    document.getElementById('info-wrong').textContent = cfg.maxWrong + ' ข้อ';
-    document.getElementById('info-type').textContent = (mode === 'reverse144') ? '2×12=? → 12×1=? (นับถอยหลัง)' : (mode === 'q144' || mode === 'mission144') ? '2×3 = ? (กดตัวเลข)' : 'ผล = a × ? (4 ตัวเลือก)';
-  } else {
-    box.style.display = 'none';
-  }
-
-  showScreen('screen-setup');
+function goHome() {
+  showScreen('screen-home');
 }
 
+// ── SETUP ──
 function confirmSetup() {
   const name = document.getElementById('input-name').value.trim();
   if (!name) { toast('⚠️ กรุณากรอกชื่อนักเรียน'); return; }
-
-  const needGrade = currentMode === 'q144' || currentMode === 'reverse144';
   const gv = document.getElementById('input-grade').value;
-  if (needGrade && !gv) { toast('⚠️ กรุณาเลือกระดับชั้น'); return; }
+  if (!gv) { toast('⚠️ กรุณาเลือกระดับชั้น'); return; }
 
   studentName = name;
-  if (gv) {
-    const [g, s] = gv.split('|');
-    studentGrade = g; targetSec = parseInt(s);
-  } else {
-    studentGrade = ''; targetSec = 0;
-  }
-
-  startQuiz(currentMode);
+  const [g, s] = gv.split('|');
+  studentGrade = g;
+  targetSec = parseInt(s);
+  startQuiz();
 }
 
-// ══════════════════════════════════════════════════════════════════
-// QUIZ MODE
-// ══════════════════════════════════════════════════════════════════
-
-// Build all 132 facts (แม่ 2–12, ×1–12)
-function allFacts() {
-  const f = [];
-  for (let a = 2; a <= 12; a++)
-    for (let b = 1; b <= 12; b++)
-      f.push({ a, b, ans: a*b });
-  return f;
-}
-
-// Build reverse-order 132 questions: แม่ 2–12 × 12–1 (ตัดแม่ 1 ออก = 11×12 = 132 ข้อ)
+// ── QUESTIONS ──
 function generateReverseQuestions() {
   const f = [];
   for (let a = 2; a <= 12; a++)
@@ -484,168 +370,98 @@ function generateReverseQuestions() {
   return f;
 }
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i > 0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
-  }
-  return a;
-}
-
-function generateQuestions(total) {
-  const all = shuffle(allFacts());
-  if (total <= all.length) return all.slice(0, total);
-  // For 132: use all 132 facts
-  const extra = shuffle(allFacts()).slice(0, total - all.length);
-  return shuffle([...all, ...extra]);
-}
-
-function generateChoices(correct, isAnswer=true) {
-  // isAnswer=true: choices are answers (a*b)
-  // isAnswer=false: choices are multipliers (b)
+function generateChoices(correct) {
   const set = new Set([correct]);
-  const range = isAnswer ? 20 : 8;
   let tries = 0;
   while (set.size < 4 && tries < 200) {
     tries++;
-    const offset = Math.floor(Math.random()*range*2) - range;
+    const offset = Math.floor(Math.random()*40) - 20;
     const c = correct + offset;
     if (c > 0 && c !== correct) set.add(c);
   }
   return [...set].sort(() => Math.random()-0.5);
 }
 
-function startQuiz(mode) {
-  const cfg = QUIZ_CONFIG[mode];
-  const isReverse = mode === 'reverse144';
-
-  // Build question list
-  let questions;
-  if (isReverse) {
-    questions = generateReverseQuestions(); // fixed order: 2×12 → 12×1
-  } else {
-    questions = generateQuestions(cfg.total);
-  }
-
-  // Determine time limit
-  let timeSec = cfg.timeSec;
-  if (mode === 'q144' || isReverse) timeSec = targetSec;
+// ── QUIZ ──
+function startQuiz() {
+  const questions = generateReverseQuestions();
 
   quiz = {
-    mode, cfg,
     questions,
     current: 0, correct: 0, wrong: 0,
     answered: false,
-    timeSec,
-    remainSec: timeSec,
+    timeSec: targetSec,
     timerInterval: null,
     startTime: Date.now(),
-    elapsed: 0,
+    elapsedAtFinish: null,
   };
 
-  document.getElementById('quiz-mode-tag').textContent = cfg.label;
-  document.getElementById('qs-maxwrong').textContent = cfg.maxWrong;
-
-  // For reverse144: show timer label as "เวลาที่ผ่านไป / เป้า"
-  if (mode === 'reverse144') {
-    document.getElementById('quiz-timer').title = `เป้าหมาย: ${fmtTime(targetSec)}`;
-  }
-
-  // Countdown timer
-  quiz.timerInterval = setInterval(tickQuizCountdown, 500);
-
+  document.getElementById('qs-maxwrong').textContent = CFG.maxWrong;
+  quiz.timerInterval = setInterval(tickTimer, 500);
   renderQuestion();
   showScreen('screen-quiz');
 }
 
-function tickQuizCountdown() {
+function tickTimer() {
   const elapsed = Math.floor((Date.now() - quiz.startTime) / 1000);
+  const remain = quiz.timeSec - elapsed;
   const el = document.getElementById('quiz-timer');
 
-  // reverse144: นับถอยหลัง — แสดงเวลาที่เหลือ
-  if (quiz.mode === 'reverse144') {
-    const remain = quiz.timeSec - elapsed;
-    if (remain <= 0) {
-      el.textContent = '00:00';
-      el.className = 'quiz-timer-display danger';
-      clearInterval(quiz.timerInterval);
-      quiz.elapsedAtFinish = quiz.timeSec;
-      setTimeout(finishQuiz, 400);
-      return;
-    }
-    el.textContent = fmtTime(remain);
-    el.className = 'quiz-timer-display' + (remain <= 30 ? ' danger' : remain <= 60 ? ' warning' : '');
-    return;
-  }
-
-  const remain = quiz.timeSec - elapsed;
   if (remain <= 0) {
     el.textContent = '00:00';
     el.className = 'quiz-timer-display danger';
     clearInterval(quiz.timerInterval);
+    quiz.elapsedAtFinish = quiz.timeSec;
     setTimeout(finishQuiz, 400);
     return;
   }
   el.textContent = fmtTime(remain);
-  el.className = 'quiz-timer-display' + (remain <= 10 ? ' danger' : remain <= 30 ? ' warning' : '');
+  el.className = 'quiz-timer-display' + (remain <= 30 ? ' danger' : remain <= 60 ? ' warning' : '');
 }
 
 function renderQuestion() {
   const q = quiz.questions[quiz.current];
   quiz.answered = false;
-  const pct = (quiz.current / quiz.cfg.total) * 100;
+  const pct = (quiz.current / CFG.total) * 100;
 
   document.getElementById('quiz-progress-bar').style.width = pct + '%';
-  document.getElementById('quiz-counter').textContent = `${quiz.current+1} / ${quiz.cfg.total}`;
+  document.getElementById('quiz-counter').textContent = `${quiz.current+1} / ${CFG.total}`;
   document.getElementById('qs-correct').textContent = quiz.correct;
   document.getElementById('qs-wrong').textContent = quiz.wrong;
-  document.getElementById('qs-remaining').textContent = quiz.cfg.total - quiz.current;
+  document.getElementById('qs-remaining').textContent = CFG.total - quiz.current;
 
-  const is144 = quiz.mode === 'q144' || quiz.mode === 'mission144';
-  const isReverse = quiz.mode === 'reverse144';
+  document.getElementById('question-text').textContent = `${q.a} × ${q.b} = ?`;
 
-  if (isReverse) {
-    // Reverse mode: show "a × b = ?" with 4 answer choices
-    document.getElementById('question-text').textContent = `${q.a} × ${q.b} = ?`;
-    document.getElementById('question-sub').textContent = `ข้อที่ ${quiz.current+1}/132 · แม่ ${q.a} ตัวคูณ ${q.b} · เหลือเวลา ${fmtTime(Math.max(0, quiz.timeSec - Math.floor((Date.now()-quiz.startTime)/1000)))}`;
-    renderChoices(generateChoices(q.ans, true), q.ans, 'ans');
-  } else if (is144) {
-    // Format: 2 × 3 = ?  (ตัวเลือกคือคำตอบ a*b)
-    document.getElementById('question-text').textContent = `${q.a} × ${q.b} = ?`;
-    document.getElementById('question-sub').textContent = 'กดคำตอบที่ถูกต้อง';
-    renderChoices(generateChoices(q.ans, true), q.ans, 'ans');
-  } else {
-    // Format: ans = a × ?  (ตัวเลือกคือ b)
-    document.getElementById('question-text').textContent = `${q.ans} = ${q.a} × ?`;
-    document.getElementById('question-sub').textContent = 'เลือกตัวคูณที่ถูกต้อง';
-    renderChoices(generateChoices(q.b, false), q.b, 'b');
-  }
+  const elapsed = Math.floor((Date.now()-quiz.startTime)/1000);
+  const remain = Math.max(0, quiz.timeSec - elapsed);
+  document.getElementById('question-sub').textContent =
+    `ข้อที่ ${quiz.current+1}/132 · แม่ ${q.a} ตัวคูณ ${q.b} · เหลือเวลา ${fmtTime(remain)}`;
+
+  renderChoices(generateChoices(q.ans), q.ans);
 
   const fb = document.getElementById('feedback-bar');
   fb.style.display = 'none'; fb.className = 'feedback-bar';
 }
 
-function renderChoices(choices, correct, key) {
+function renderChoices(choices, correct) {
   const grid = document.getElementById('choices-grid');
   grid.innerHTML = '';
   choices.forEach(c => {
     const btn = document.createElement('button');
     btn.className = 'choice-btn';
     btn.textContent = c;
-    btn.onclick = () => answerQuiz(c, correct, key);
+    btn.onclick = () => answerQuiz(c, correct);
     grid.appendChild(btn);
   });
 }
 
-function answerQuiz(chosen, correct, key) {
+function answerQuiz(chosen, correct) {
   if (quiz.answered) return;
   quiz.answered = true;
 
   const isCorrect = chosen === correct;
   if (isCorrect) quiz.correct++; else quiz.wrong++;
 
-  // Color buttons
   document.querySelectorAll('.choice-btn').forEach(btn => {
     btn.disabled = true;
     const v = parseInt(btn.textContent);
@@ -657,173 +473,83 @@ function answerQuiz(chosen, correct, key) {
   const fb = document.getElementById('feedback-bar');
   fb.style.display = 'block';
   fb.className = 'feedback-bar ' + (isCorrect ? 'correct' : 'wrong');
-
-  if (quiz.mode === 'q144' || quiz.mode === 'mission144' || quiz.mode === 'reverse144') {
-    fb.textContent = isCorrect
-      ? `✅ ถูก! ${q.a} × ${q.b} = ${q.ans}`
-      : `❌ ผิด! ${q.a} × ${q.b} = ${q.ans}`;
-  } else {
-    fb.textContent = isCorrect
-      ? `✅ ถูก! ${q.ans} = ${q.a} × ${correct}`
-      : `❌ ผิด! ตัวคูณที่ถูก = ${correct}  →  ${q.a} × ${correct} = ${q.ans}`;
-  }
+  fb.textContent = isCorrect
+    ? `✅ ถูก! ${q.a} × ${q.b} = ${q.ans}`
+    : `❌ ผิด! ${q.a} × ${q.b} = ${q.ans}`;
 
   document.getElementById('qs-correct').textContent = quiz.correct;
   document.getElementById('qs-wrong').textContent = quiz.wrong;
 
-  // Auto-finish if wrong exceeds max
-  if (quiz.wrong > quiz.cfg.maxWrong) {
+  if (quiz.wrong > CFG.maxWrong) {
     clearInterval(quiz.timerInterval);
     quiz.elapsedAtFinish = Math.floor((Date.now() - quiz.startTime) / 1000);
     setTimeout(finishQuiz, 900);
     return;
   }
 
-  // Check if this was the last question
-  const isLastQuestion = (quiz.current + 1 >= quiz.cfg.total);
-  if (isLastQuestion) {
+  const isLast = (quiz.current + 1 >= CFG.total);
+  if (isLast) {
     clearInterval(quiz.timerInterval);
     quiz.elapsedAtFinish = Math.floor((Date.now() - quiz.startTime) / 1000);
   }
 
   setTimeout(() => {
     quiz.current++;
-    if (quiz.current < quiz.cfg.total) renderQuestion();
+    if (quiz.current < CFG.total) renderQuestion();
     else finishQuiz();
-  }, 800);
+  }, isCorrect ? 400 : 900);
 }
 
-function getScoreLabel(accuracy, timePass) {
-  // สำหรับโหมด q20/q30/q40/q55 เท่านั้น
-  if (!timePass) return null; // ไม่ผ่านเวลา ไม่มีระดับ
-  if (accuracy === 100) return { label: 'ดีเยี่ยม', icon: '🌟', cls: 'result-pass' };
-  if (accuracy >= 90)  return { label: 'ดีมาก',   icon: '🏆', cls: 'result-pass' };
-  if (accuracy >= 80)  return { label: 'ดี',       icon: '👍', cls: 'result-pass' };
-  return null;
-}
-
+// ── FINISH ──
 function finishQuiz() {
   clearInterval(quiz.timerInterval);
-  const elapsed = (quiz.elapsedAtFinish != null) ? quiz.elapsedAtFinish : Math.floor((Date.now() - quiz.startTime) / 1000);
-  // reverse144 countdown: ผ่านถ้าตอบครบก่อนหมดเวลา
-  // elapsedAtFinish ถูกบันทึกตอนกดข้อสุดท้าย ก่อนหมดเวลา = elapsed < timeSec
-  // ถ้าหมดเวลาก่อน (tickQuizCountdown เรียก finishQuiz) = elapsed >= timeSec
-  const timePass = (quiz.mode === 'reverse144')
-    ? (elapsed < quiz.timeSec)
-    : elapsed <= quiz.timeSec;
-  const wrongPass = quiz.wrong <= quiz.cfg.maxWrong;
+  const elapsed = (quiz.elapsedAtFinish != null)
+    ? quiz.elapsedAtFinish
+    : Math.floor((Date.now() - quiz.startTime) / 1000);
+
+  const timePass = elapsed < quiz.timeSec;
+  const wrongPass = quiz.wrong <= CFG.maxWrong;
   const overall = timePass && wrongPass;
-  const accuracy = Math.round((quiz.correct / quiz.cfg.total) * 100);
+  const accuracy = Math.round((quiz.correct / CFG.total) * 100);
 
-  const isScored = ['q20','q30','q40','q55'].includes(quiz.mode);
-  const isMission = quiz.mode === 'mission144';
-  const isReverse = quiz.mode === 'reverse144';
-  const scoreInfo = isScored ? getScoreLabel(accuracy, timePass) : null;
-
-  // ─── กำหนดหัวผลลัพธ์ ───
-  let resultTitle, resultIcon, heroCls;
-  if (isReverse) {
-    if (overall) {
-      resultTitle = 'ผ่านเกณฑ์!';
-      resultIcon  = '🏆';
-      heroCls     = 'result-pass';
-    } else {
-      resultTitle = 'ยังไม่ผ่าน';
-      resultIcon  = '💪';
-      heroCls     = 'result-fail';
-    }
-  } else if (isMission && overall) {
-    resultTitle = '🎉 ผ่านภารกิจ!';
-    resultIcon  = '🏅';
-    heroCls     = 'result-pass';
-  } else if (isScored && overall && scoreInfo) {
-    resultTitle = scoreInfo.label;
-    resultIcon  = scoreInfo.icon;
-    heroCls     = scoreInfo.cls;
-  } else if (overall) {
-    resultTitle = 'ผ่านเกณฑ์!';
-    resultIcon  = '🏆';
-    heroCls     = 'result-pass';
-  } else {
-    resultTitle = 'ยังไม่ผ่าน';
-    resultIcon  = '💪';
-    heroCls     = 'result-fail';
-  }
-
+  // Result hero
   const hero = document.getElementById('result-hero');
-  hero.className = 'result-hero ' + heroCls;
-  document.getElementById('result-icon').textContent = resultIcon;
-  document.getElementById('result-title').textContent = resultTitle;
+  hero.className = 'result-hero ' + (overall ? 'result-pass' : 'result-fail');
+  document.getElementById('result-icon').textContent = overall ? '🏆' : '💪';
+  document.getElementById('result-title').textContent = overall ? 'ผ่านเกณฑ์!' : 'ยังไม่ผ่าน';
   document.getElementById('result-student-name').textContent = studentName;
   document.getElementById('result-grade-badge').textContent =
-    `${quiz.cfg.label} | เวลา ${fmtTime(quiz.timeSec)} | ผิดได้ ${quiz.cfg.maxWrong} ข้อ`;
+    `${CFG.label} | เป้า ${fmtTime(quiz.timeSec)} | ผิดได้ ${CFG.maxWrong} ข้อ`;
 
-  // ─── แสดงแบนเนอร์รางวัล ───
-  let rewardBanner = '';
-  if (isMission && overall) {
-    rewardBanner = `
-    <div style="background:linear-gradient(135deg,var(--gold),#e8950f);border-radius:18px;padding:22px;text-align:center;margin-bottom:14px;box-shadow:0 8px 30px rgba(245,166,35,0.4);">
-      <div style="font-size:52px;margin-bottom:6px;">🎁</div>
-      <div style="font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:var(--navy);margin-bottom:4px;">ยินดีด้วย! ได้รับรางวัลพิเศษ</div>
-      <div style="font-size:13px;color:var(--navy);opacity:0.85;margin-bottom:10px;">ทำ 132 ข้อสำเร็จภายใน 300 วินาที 🌟</div>
-      <div style="background:rgba(255,255,255,0.4);border-radius:10px;padding:10px 16px;display:inline-block;">
-        <div style="font-family:'Kanit',sans-serif;font-size:15px;font-weight:800;color:var(--navy);">🏅 เหรียญ ครูแซม คณิตตรงจุด ติด TURBO  CHAMPION</div>
-        <div style="font-size:11px;color:var(--navy);opacity:0.8;margin-top:2px;">สูตรคูณครบ 132 ข้อ ≤ 5 นาที</div>
-      </div>
-    </div>`;
-  } else if (isReverse && overall) {
-    rewardBanner = `
-    <div style="background:linear-gradient(135deg,#9b59b6,#6c3483);border-radius:18px;padding:22px;text-align:center;margin-bottom:14px;box-shadow:0 8px 30px rgba(155,89,182,0.4);">
-      <div style="font-size:52px;margin-bottom:6px;">🔄</div>
-      <div style="font-family:'Kanit',sans-serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:4px;">ผ่านการทดสอบถอยหลัง!</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:10px;">ครบ 132 ข้อ ใช้เวลา ${fmtTime(elapsed)} 🌟</div>
-      <div style="background:rgba(255,255,255,0.2);border-radius:10px;padding:10px 16px;display:inline-block;">
-        <div style="font-family:'Kanit',sans-serif;font-size:15px;font-weight:800;color:#fff;">🏆 Reverse Master — ${studentGrade}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.8);margin-top:2px;">สูตรคูณถอยหลัง 2×12 → 12×2 ผ่านเกณฑ์</div>
-      </div>
-    </div>`;
-  }
-  document.getElementById('reward-banner').innerHTML = rewardBanner;
-
-  document.getElementById('stat-grid').innerHTML = isReverse ? `
-    <div class="stat-box"><div class="s-num">${quiz.correct}/${quiz.cfg.total}</div><div class="s-lbl">ถูกต้อง</div></div>
-    <div class="stat-box"><div class="s-num">${quiz.wrong}</div><div class="s-lbl">ผิด (max ${quiz.cfg.maxWrong})</div></div>
-    <div class="stat-box"><div class="s-num">${fmtTime(elapsed)}</div><div class="s-lbl">เวลาที่ใช้</div></div>
-  ` : `
-    <div class="stat-box"><div class="s-num">${quiz.correct}/${quiz.cfg.total}</div><div class="s-lbl">ถูกต้อง</div></div>
-    <div class="stat-box"><div class="s-num">${quiz.wrong}</div><div class="s-lbl">ผิด (max ${quiz.cfg.maxWrong})</div></div>
+  // Stats
+  document.getElementById('stat-grid').innerHTML = `
+    <div class="stat-box"><div class="s-num">${quiz.correct}/${CFG.total}</div><div class="s-lbl">ถูกต้อง</div></div>
+    <div class="stat-box"><div class="s-num">${quiz.wrong}</div><div class="s-lbl">ผิด (max ${CFG.maxWrong})</div></div>
     <div class="stat-box"><div class="s-num">${fmtTime(elapsed)}</div><div class="s-lbl">เวลาที่ใช้</div></div>
   `;
 
-  // ─── แถวเกณฑ์ระดับ (เฉพาะโหมด q20/q30/q40/q55) ───
-  let scoreLevelRow = '';
-  if (isScored) {
-    let levelText, levelCls;
-    if (!timePass) {
-      levelText = '✗ ไม่ผ่าน (เกินเวลา)'; levelCls = 'fail';
-    } else if (scoreInfo) {
-      levelText = `✓ ${scoreInfo.label} (${accuracy}%)`; levelCls = 'pass';
-    } else {
-      levelText = `ต้องพัฒนา (${accuracy}%)`; levelCls = 'fail';
-    }
-    scoreLevelRow = `
-    <div class="history-item">
-      <span class="round-num">ระดับผลคะแนน</span>
-      <span class="round-time">${accuracy}%</span>
-      <span class="round-result ${levelCls}">${levelText}</span>
-    </div>`;
-  }
+  // Reward banner
+  document.getElementById('reward-banner').innerHTML = overall ? `
+    <div class="reward-banner">
+      <div class="reward-icon">🔄</div>
+      <div class="reward-title">ผ่านการทดสอบถอยหลัง!</div>
+      <div class="reward-sub">ครบ 132 ข้อ ใช้เวลา ${fmtTime(elapsed)} 🌟</div>
+      <div class="reward-badge">
+        <div class="reward-badge-text">🏆 Reverse Master — ${studentGrade}</div>
+        <div class="reward-badge-sub">สูตรคูณถอยหลัง 2×12 → 12×1 ผ่านเกณฑ์</div>
+      </div>
+    </div>` : '';
 
-  document.getElementById('result-detail-title').textContent = isReverse ? 'สรุปผลถอยหลัง 132 ข้อ' : 'สรุปผล Quiz';
+  // Detail rows
   document.getElementById('result-history').innerHTML = `
     <div class="history-item">
-      <span class="round-num">${isReverse ? 'เวลาที่ใช้ไป' : 'เวลาที่ใช้'}</span>
+      <span class="round-num">เวลาที่ใช้ไป</span>
       <span class="round-time">${fmtTime(elapsed)}</span>
-      <span class="round-result ${timePass?'pass':'fail'}">${timePass ? (isReverse ? '✓ ทันเวลา' : '✓ ผ่าน') : (isReverse ? '✗ หมดเวลา' : '✗ เกินเวลา')}</span>
+      <span class="round-result ${timePass?'pass':'fail'}">${timePass?'✓ ทันเวลา':'✗ หมดเวลา'}</span>
     </div>
     <div class="history-item">
       <span class="round-num">ข้อที่ผิด</span>
-      <span class="round-time">${quiz.wrong} / ${quiz.cfg.maxWrong}</span>
+      <span class="round-time">${quiz.wrong} / ${CFG.maxWrong}</span>
       <span class="round-result ${wrongPass?'pass':'fail'}">${wrongPass?'✓ ผ่าน':'✗ เกินที่กำหนด'}</span>
     </div>
     <div class="history-item">
@@ -831,114 +557,29 @@ function finishQuiz() {
       <span class="round-time">${accuracy}%</span>
       <span class="round-result ${accuracy>=75?'pass':'fail'}">${accuracy>=75?'✓ ดี':'ต้องพัฒนา'}</span>
     </div>
-    ${isReverse ? `<div class="history-item" style="border:1.5px solid #9b59b6;">
-      <span class="round-num" style="color:#6c3483;">เกณฑ์ระดับ ${studentGrade}</span>
-      <span class="round-time" style="color:#9b59b6;">${fmtTime(quiz.timeSec)}</span>
+    <div class="history-item" style="border:1.5px solid #1e88e5;">
+      <span class="round-num" style="color:#0d47a1;">เกณฑ์ระดับ ${studentGrade}</span>
+      <span class="round-time" style="color:#1e88e5;">${fmtTime(quiz.timeSec)}</span>
       <span class="round-result ${timePass?'pass':'fail'}">${timePass?'✓ ผ่านเกณฑ์':'✗ ยังไม่ผ่าน'}</span>
-    </div>` : scoreLevelRow}
+    </div>
   `;
 
-  // ─── ข้อความระดับสำหรับแชร์ ───
-  let scoreShareLine = '';
-  if (isMission && overall) {
-    scoreShareLine = `\n🏅 รางวัล: ผ่านภารกิจ 132 ข้อ ใน ${fmtTime(elapsed)} ✅`;
-  } else if (isReverse) {
-    scoreShareLine = overall
-      ? `\n🔄 ถอยหลัง 132 ข้อ: ผ่านเกณฑ์ ${studentGrade} ใช้เวลา ${fmtTime(elapsed)} (เป้า ${fmtTime(quiz.timeSec)}) ✅`
-      : `\n🔄 ถอยหลัง 132 ข้อ: ยังไม่ผ่าน — ฝึกต่อ!`;
-  } else if (isScored && overall) {
-    scoreShareLine = scoreInfo
-      ? `\n🌟 ระดับ: ${scoreInfo.label} (ถูก ${accuracy}%)`
-      : `\n📌 ระดับ: ต้องพัฒนา (ถูก ${accuracy}%)`;
-  }
-
+  // Share text
   const today = new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
-  const gradeStr = studentGrade ? `\n📚 ระดับชั้น: ${studentGrade}` : '';
+  const shareResult = overall
+    ? `🔄 ถอยหลัง 132 ข้อ: ผ่านเกณฑ์ ${studentGrade} ใช้เวลา ${fmtTime(elapsed)} (เป้า ${fmtTime(quiz.timeSec)}) ✅`
+    : `🔄 ถอยหลัง 132 ข้อ: ยังไม่ผ่าน — ฝึกต่อ!`;
+
   document.getElementById('share-text').textContent =
-    `${overall?resultIcon:'📊'} ผลทดสอบ ${quiz.cfg.label}\n` +
+    `${overall?'🏆':'💪'} ผลทดสอบ ${CFG.label}\n` +
     `─────────────────\n` +
-    `👤 นักเรียน: ${studentName}${gradeStr}\n` +
-    `✅ ถูก: ${quiz.correct}/${quiz.cfg.total} ข้อ  |  ❌ ผิด: ${quiz.wrong} ข้อ\n` +
-    `⏱ เวลา: ${fmtTime(elapsed)} (กำหนด ${fmtTime(quiz.timeSec)})\n` +
-    `🎯 ผล: ${overall?'ผ่านเกณฑ์!':'ยังไม่ผ่าน — ฝึกต่อ!'}${scoreShareLine}\n` +
-    `📅 ${today}\n─────────────────\n🎓 ครูแซม คณิตตรงจุด ติด TURBO `;
+    `👤 นักเรียน: ${studentName}\n📚 ระดับชั้น: ${studentGrade}\n` +
+    `✅ ถูก: ${quiz.correct}/${CFG.total} ข้อ  |  ❌ ผิด: ${quiz.wrong} ข้อ\n` +
+    `⏱ เวลา: ${fmtTime(elapsed)} (เป้า ${fmtTime(quiz.timeSec)})\n` +
+    `🎯 ผล: ${overall?'ผ่านเกณฑ์!':'ยังไม่ผ่าน — ฝึกต่อ!'}\n${shareResult}\n` +
+    `📅 ${today}\n─────────────────\n🎓 ครูแซม คณิตตรงจุด ติด TURBO`;
 
   showScreen('screen-result');
-}
-
-// ══════════════════════════════════════════════════════════════════
-// STOPWATCH MODE
-// ══════════════════════════════════════════════════════════════════
-let sw = { running:false, startTime:null, elapsed:0, interval:null, laps:[], lapCount:0 };
-
-function startStopwatch() {
-  sw = { running:false, startTime:null, elapsed:0, interval:null, laps:[], lapCount:0 };
-  document.getElementById('timer-display').textContent = '00:00';
-  document.getElementById('timer-display').className = 'timer-display';
-  document.getElementById('timer-ms-display').textContent = '00';
-  document.getElementById('btn-start-stop').textContent = '▶ เริ่ม';
-  document.getElementById('btn-lap').disabled = true;
-  document.getElementById('history-list').innerHTML =
-    '<div style="text-align:center;color:var(--muted);font-size:12px;padding:14px;">กดจดเวลาเพื่อบันทึก</div>';
-  showScreen('screen-timer');
-}
-
-function toggleStopwatch() {
-  if (!sw.running) {
-    sw.running = true;
-    sw.startTime = Date.now() - sw.elapsed;
-    sw.interval = setInterval(tickStopwatch, 50);
-    document.getElementById('btn-start-stop').textContent = '⏸ หยุด';
-    document.getElementById('btn-lap').disabled = false;
-  } else {
-    sw.running = false;
-    clearInterval(sw.interval);
-    sw.elapsed = Date.now() - sw.startTime;
-    document.getElementById('btn-start-stop').textContent = '▶ ดำเนินต่อ';
-  }
-}
-
-function resetStopwatch() {
-  sw.running = false;
-  clearInterval(sw.interval);
-  sw.elapsed = 0; sw.startTime = null; sw.laps = []; sw.lapCount = 0;
-  document.getElementById('timer-display').textContent = '00:00';
-  document.getElementById('timer-display').className = 'timer-display';
-  document.getElementById('timer-ms-display').textContent = '00';
-  document.getElementById('btn-start-stop').textContent = '▶ เริ่ม';
-  document.getElementById('btn-lap').disabled = true;
-  document.getElementById('history-list').innerHTML =
-    '<div style="text-align:center;color:var(--muted);font-size:12px;padding:14px;">กดจดเวลาเพื่อบันทึก</div>';
-}
-
-function tickStopwatch() {
-  const ms = Date.now() - sw.startTime;
-  const totalSec = Math.floor(ms / 1000);
-  const centisec = Math.floor((ms % 1000) / 10);
-  const m = Math.floor(totalSec / 60), s = totalSec % 60;
-  document.getElementById('timer-display').textContent =
-    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  document.getElementById('timer-ms-display').textContent =
-    String(centisec).padStart(2,'0');
-}
-
-function recordLap() {
-  if (!sw.startTime) return;
-  const ms = Date.now() - sw.startTime;
-  sw.lapCount++;
-  sw.laps.push({ n: sw.lapCount, ms });
-  renderLaps();
-  toast(`📌 จดเวลา #${sw.lapCount}: ${fmtTimeMs(ms)}`);
-}
-
-function renderLaps() {
-  if (!sw.laps.length) return;
-  document.getElementById('history-list').innerHTML = sw.laps.slice().reverse().map(l => `
-    <div class="history-item">
-      <span class="round-num">#${l.n}</span>
-      <span class="round-time" style="font-size:20px;">${fmtTimeMs(l.ms)}</span>
-      <span class="round-result" style="background:var(--bg);color:var(--blue);">Lap ${l.n}</span>
-    </div>`).join('');
 }
 
 function copyShare() {
