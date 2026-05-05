@@ -788,7 +788,8 @@ function finishQuiz() {
     elapsed: fmtTime(elapsed),
     target: fmtTime(quiz.timeSec),
     passed: overall ? 'ผ่าน' : 'ไม่ผ่าน',
-    accuracy: accuracy + '%'
+    accuracy: accuracy + '%',
+    tableStats: buildTableStats(quiz.questionLog)  // ← ใหม่: ส่งข้อมูลรายแม่ไปด้วย
   });
 
   showScreen('screen-result');
@@ -999,6 +1000,44 @@ function copyShare() {
     document.execCommand('copy'); document.body.removeChild(ta);
     toast('✅ คัดลอกแล้ว!');
   }
+}
+
+// ══════════════════════════════════════════════════════
+// 📊 buildTableStats — สร้างข้อมูลสรุปรายแม่เพื่อส่ง Google Sheets
+// ใช้ใน saveToSheet({ tableStats: buildTableStats(quiz.questionLog) })
+// ══════════════════════════════════════════════════════
+function buildTableStats(log) {
+  if (!log || log.length === 0) return [];
+
+  const overallAvgMs = log.reduce((s, e) => s + e.timeTakenMs, 0) / log.length;
+
+  const map = {};
+  log.forEach(entry => {
+    if (!map[entry.a]) map[entry.a] = { totalMs: 0, count: 0, wrongCount: 0 };
+    map[entry.a].totalMs += entry.timeTakenMs;
+    map[entry.a].count++;
+    if (!entry.correct) map[entry.a].wrongCount++;
+  });
+
+  return Object.keys(map)
+    .map(a => {
+      const d = map[a];
+      const avgMs = d.totalMs / d.count;
+      const ratio = avgMs / overallAvgMs;
+      const speedLabel = ratio < 0.8  ? '⚡ เร็ว'
+                       : ratio > 1.3  ? '🐢 ช้ามาก'
+                       : ratio > 1.1  ? '🔶 ช้า'
+                       : '✅ ปกติ';
+      return {
+        a: parseInt(a),
+        count: d.count,
+        wrongCount: d.wrongCount,
+        totalSec: parseFloat((d.totalMs / 1000).toFixed(2)),
+        avgSec:   parseFloat((avgMs / 1000).toFixed(2)),
+        speedLabel
+      };
+    })
+    .sort((x, y) => x.a - y.a);
 }
 </script>
 </body>
